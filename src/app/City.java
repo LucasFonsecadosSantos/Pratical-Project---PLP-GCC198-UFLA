@@ -10,5 +10,9 @@
 package app;
 
 public class City {
-    
+
+    private String name;
+    private int amountPopulation;
+    private double PIB;
+
 }

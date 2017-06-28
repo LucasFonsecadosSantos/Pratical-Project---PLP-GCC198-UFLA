@@ -7,8 +7,6 @@
  *  @author Lucas Fonseca dos Santos
  *  @author Leticia Ferreira
  */
-package main;
-
 import app.System;
 
 public class Main {
