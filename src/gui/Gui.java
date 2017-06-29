@@ -53,7 +53,7 @@ public class Gui {
         }
     }
 
-    public int callMenu(){
+    public String callMenu(){
         clear();
         System.out.println("+==================================================+");
         System.out.println("+                                                  +");
@@ -74,32 +74,45 @@ public class Gui {
         System.out.println("+==================================================+");
         System.out.print("[#] ENTER YOUR OPTION: ");
         try {
-            return Integer.parseInt(scanner.nextLine());
+            return scanner.nextLine();
         }catch(NumberFormatException nfe) {
             nfe.printStackTrace();
-            return -99;
+            return "-99";
         }
     }
 
+    /**
+     * This method is reponsible for shows informations 
+     * to the user to registering a new city 
+     * on system data. He can add how many citys the user
+     * wants.
+     * 
+     * @return List<String> New citys registered.
+     */
     public List<String> createCityInformations() {
-        clear();
         List<String> informations = new ArrayList<String>();
-        System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
-        System.out.println(ANSI_GREEN+"+ REGISTER A NEW CITY                              +"+ANSI_RESET);
-        System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
-        System.out.println(ANSI_YELLOW+"[!] The neighborhoods will be add after this process;"+ANSI_RESET);
-        System.out.print(ANSI_WHITE+"[#] City Name: "+ANSI_RESET);
-        informations.add(scanner.nextLine());
-        System.out.print(ANSI_WHITE+"[#] State/District: "+ANSI_RESET);
-        informations.add(scanner.nextLine());
-        System.out.print(ANSI_WHITE+"[#] Country: "+ANSI_RESET);
-        informations.add(scanner.nextLine());
-        System.out.print(ANSI_WHITE+"[#] Amount City Population (Enter a integer value): "+ANSI_RESET);
-        informations.add(scanner.nextLine());
-        System.out.print(ANSI_WHITE+"[#] PIB (Enter a integer or decimal value): "+ANSI_RESET);
-        informations.add(scanner.nextLine());
-        System.out.print(ANSI_WHITE+"[#] Current Major: "+ANSI_RESET);
-        informations.add(scanner.nextLine());
+        String option = "y";
+        do {
+            clear();
+            System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
+            System.out.println(ANSI_GREEN+"+ REGISTER A NEW CITY                              +"+ANSI_RESET);
+            System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
+            System.out.println(ANSI_YELLOW+"[!] The neighborhoods will be add after this process;"+ANSI_RESET);
+            System.out.print(ANSI_WHITE+"[#] City Name: "+ANSI_RESET);
+            informations.add(scanner.nextLine());
+            System.out.print(ANSI_WHITE+"[#] State/District: "+ANSI_RESET);
+            informations.add(scanner.nextLine());
+            System.out.print(ANSI_WHITE+"[#] Country: "+ANSI_RESET);
+            informations.add(scanner.nextLine());
+            System.out.print(ANSI_WHITE+"[#] Amount City Population (Enter a integer value): "+ANSI_RESET);
+            informations.add(scanner.nextLine());
+            System.out.print(ANSI_WHITE+"[#] PIB (Enter a integer or decimal value): "+ANSI_RESET);
+            informations.add(scanner.nextLine());
+            System.out.print(ANSI_WHITE+"[#] Current Mayor: "+ANSI_RESET);
+            informations.add(scanner.nextLine());
+            System.out.print("[#] Do you want to register a new city [Y/n]?");
+            option = scanner.nextLine().toLowerCase();
+        }while(option.equals("y"));
         pressToContinue();
         return informations;
     }

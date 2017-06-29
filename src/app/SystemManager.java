@@ -26,12 +26,12 @@ public class SystemManager {
 
     public void execute() {
 
-        int option = 0;
+        String option = "";
         List<String> dataCitysName = data.loadDisponibleCitys();
-        while(option != -99) {
-            option = gui.callMenu(dataCitysName);
+        while(!option.equals("-99")) {
+            option = gui.callMenu();
             switch(option) {
-                case 1:
+                case "1":
                     createNewCity();
                     break;
                 default:
@@ -42,7 +42,35 @@ public class SystemManager {
     }
 
     public void createNewCity() {
-        gui.createCityInformations();
+        List<String> contents = gui.createCityInformations();
+        List<City> citys = new ArrayList<City>();
+        int count = 0;
+
+        String name = "";
+        String district = "";
+        String country = "";
+        int amount = 0;
+        double PIB = 0;
+        String mayor = "";
+
+        for(int i=0; i < contents.size(); i++) {
+            if(i % 6 == 0) {
+                name = contents.get(i);
+            }else if(i % 6 == 1) {
+                district = contents.get(i);
+            }else if(i % 6 == 2) {
+                country = contents.get(i);
+            }else if(i % 6 == 3) {
+                amount = Integer.parseInt(contents.get(i));
+            }else if(i % 6 == 4) {
+                PIB = Integer.parseInt(contents.get(i));
+            }else if(i % 6 == 5) {
+                mayor = contents.get(i);
+            }
+            citys.add(new City(name, district, country, amount, PIB, mayor));
+        }
+        System.out.println(citys);
+
     }
     
 }

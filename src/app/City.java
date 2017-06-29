@@ -12,7 +12,19 @@ package app;
 public class City {
 
     private String name;
-    private int amountPopulation;
-    private double PIB;
+    private String district;
+    private String country;
+    private int populationAmount;
+    private double pib;
+    private String mayor;
+
+    public City(String name, String district, String country, int populationAmount, double pib, String mayor) {
+        this.name = name;
+        this.district = district;
+        this.country = country;
+        this.populationAmount = populationAmount;
+        this.pib = pib;
+        this.mayor = mayor;
+    }
 
 }
