@@ -7,12 +7,12 @@
  *  @author Lucas Fonseca dos Santos
  *  @author Leticia Ferreira
  */
-import app.System;
+import app.SystemManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        System system = new System();
+        SystemManager system = new SystemManager();
         system.execute();
     }
     

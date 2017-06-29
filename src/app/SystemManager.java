@@ -10,20 +10,26 @@
 package app;
 
 import gui.Gui;
+import util.Data;
+import java.util.List;
+import java.util.ArrayList;
 
-public class System {
+public class SystemManager {
 
     private Gui gui;
+    private Data data;
 
-    public System() {
+    public SystemManager() {
         gui = new Gui();
+        data = new Data();
     }
 
     public void execute() {
 
         int option = 0;
+        List<String> dataCitysName = data.loadDisponibleCitys();
         while(option != -99) {
-            option = gui.callMenu();
+            option = gui.callMenu(dataCitysName);
             switch(option) {
                 case 1:
                     createNewCity();
