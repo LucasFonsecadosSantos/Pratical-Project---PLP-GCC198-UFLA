@@ -9,7 +9,9 @@
  */
 package app;
 
-public class Neighborhood extends Record {
+import java.io.Serializable;
+
+public class Neighborhood extends Record implements Serializable {
     
     public Neighborhood(String name, int demographicRate, double perCaptaIncome, int crimeRate) {
         setName(name);

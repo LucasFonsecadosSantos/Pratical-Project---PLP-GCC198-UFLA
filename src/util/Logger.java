@@ -39,9 +39,7 @@ public class Logger {
             }
             br = new BufferedReader(new FileReader("./logs/"+currentDate+".txt"));
             bw = new BufferedWriter(new FileWriter("./logs/"+currentDate+".txt", true));
-            System.out.println("ainda nao entrou");
             if(br.readLine() == null) {
-                System.out.println("entrou");
                 bw.newLine();
                 bw.write("+==========================================+\n");
                 bw.write("+           CITY MANAGER LOG FILE          +\n");
@@ -71,8 +69,22 @@ public class Logger {
         return successfullyMessage;
     }
 
-    public String genereterRecordLog() {
+    /**
+     * This method is responsible for generating new system logs
+     * It receives a message by parameter.
+     * 
+     * 
+     */
+    public String generateMessageLog(String action) {
         startLog();
+        SystemDate sd = new SystemDate();
+        try {
+            bw = new BufferedWriter(new FileWriter("./logs/"+sd.returnOnlyDate()+".txt", true));
+            bw.write("["+sd.returnCompleteDate()+"/RECORD]: "+action+" ;\n");
+            bw.close();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
         return successfullyMessage;
     }
 

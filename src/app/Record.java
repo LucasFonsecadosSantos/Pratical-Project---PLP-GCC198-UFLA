@@ -14,7 +14,7 @@ package app;
  * It contains the common characteristics between the class
  * City and Neighborhood.
  */
-public abstract class Record {
+public abstract class Record{
 
     /**
      * String name attribute;

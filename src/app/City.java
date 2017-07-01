@@ -11,6 +11,7 @@ package app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  * This class describes the City object.
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * contains a district, country, mayor and neighborhood
  * list attribute.
  */
-public class City extends Record{
+public class City extends Record implements Serializable{
 
     /**
      * District name string attribute state.

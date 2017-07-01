@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.File;
@@ -24,8 +25,9 @@ import java.util.List;
 import java.util.ArrayList;
 import app.City;
 import app.Neighborhood;
+import java.io.Serializable;
 
-public class Data {
+public class Data implements Serializable {
     
     private final String successfullyMessage;
 
@@ -59,14 +61,20 @@ public class Data {
     public String storeCityData(List<City> citysList) {
         for(City c : citysList) {
             try {
-                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/citys/" + c.getName() + ".bin"));
+                File file = new File("./data/citys/"+c.getName()+".bin");
+                if(!new File("./data/citys").exists()) {
+                    new File("./data/citys").mkdirs();
+                }
+                if(!file.exists()) {
+                    file.createNewFile();
+                }   
+                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/citys/" + c.getName() + ".bin", true));
                 object.writeObject(c);
             }catch(Exception e) {
                 e.printStackTrace();
             }
         }
-        return successfullyMessage;
-        
+        return successfullyMessage;    
     }
 
 }
