@@ -9,10 +9,10 @@
  */
 package app;
 
-import java.io.Serializable;
 
-public class Neighborhood extends Record implements Serializable {
-    
+
+public class Neighborhood extends Record {
+        
     public Neighborhood(String name, int demographicRate, double perCaptaIncome, int crimeRate) {
         setName(name);
         setDemographicRate(demographicRate);
@@ -20,5 +20,13 @@ public class Neighborhood extends Record implements Serializable {
         setCrimeRate(crimeRate);
     }
 
+    @Override
+    public String toString() {
+        String s = "[Neighborhood Name]: " + getName() +".\n";
+        s += "[Demographic Rate]: " + getDemographicRate() + " peoples.\n";
+        s += "[Per Capta Income Rate]: " + getPerCaptaIncome() + "\n";
+        s += "[Crime Rate]: " + getCrimeRate() + " crime cases.\n";
+        return s;
+    }
 
 }

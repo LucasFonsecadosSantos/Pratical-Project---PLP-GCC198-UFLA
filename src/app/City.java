@@ -19,8 +19,8 @@ import java.io.Serializable;
  * contains a district, country, mayor and neighborhood
  * list attribute.
  */
-public class City extends Record implements Serializable{
-
+public class City extends Record {
+    
     /**
      * District name string attribute state.
      */
@@ -83,6 +83,13 @@ public class City extends Record implements Serializable{
         this.country = country.toLowerCase();
     }
 
+    public String getCountry() {
+        return this.country;
+    }
+
+    public String getMayor() {
+        return this.mayor;
+    }
     /**
      * Mayor string name attribute state modifier method.
      * 
@@ -92,6 +99,9 @@ public class City extends Record implements Serializable{
         this.mayor = mayor.toLowerCase();
     }
 
+    public String getDistrict() {
+        return this.district;
+    }
     /**
      * This method is responsible for add new neighborhoods
      * into neighborhood list. This list is a attribute.
@@ -101,6 +111,14 @@ public class City extends Record implements Serializable{
     public void addNeighborhood(Neighborhood n) {
         this.neighborhoodSet.add(n);
         updateRates();
+    }
+
+    public List<Neighborhood> getNeighborhoods() {
+        if(neighborhoodSet.size() == 0) {
+            return null;
+        }else {
+            return neighborhoodSet;
+        }
     }
 
     /**

@@ -10,6 +10,9 @@
 package gui;
 
 import java.util.Scanner;
+
+import app.Neighborhood;
+import app.City;
 import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -111,6 +114,28 @@ public class Gui {
         }while(option.equals("y"));
         pressToContinue();
         return informations;
+    }
+
+    public void showCitysData(List<City> cities) {
+        clear();
+        List<Neighborhood> neighborhoodList;
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ REGISTERED CITIES INFORMATIONS                   +");
+        System.out.println("+--------------------------------------------------+");
+        for(City c : cities) {
+            System.out.println("\n+ CITY NAME: " +c.getName());
+            System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
+            System.out.println("+ COUNTRY: " +c.getCountry());
+            System.out.println("+ CURRENT MAYOR: " +c.getMayor());
+            System.out.println("+ NEIGHBORHOODS: ");
+            neighborhoodList = c.getNeighborhoods();
+            if(neighborhoodList != null) {
+                for(Neighborhood n : neighborhoodList) {
+                    System.out.println(n.toString());
+                }
+            }
+        }
+        pressToContinue();
     }
 
 }

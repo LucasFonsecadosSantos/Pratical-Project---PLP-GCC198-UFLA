@@ -15,6 +15,7 @@ import util.Logger;
 import java.util.List;
 import java.util.ArrayList;
 
+
 public class SystemManager {
 
     private Gui gui;
@@ -36,6 +37,9 @@ public class SystemManager {
             switch(option) {
                 case "1":
                     createNewCity();
+                    break;
+                case "3":
+                    loadAllCitys();
                     break;
                 default:
                     break;
@@ -67,7 +71,11 @@ public class SystemManager {
             citys.add(new City(name, district, country, currentMayor));
         }
         data.storeCityData(citys);
+    }
 
+    public void loadAllCitys() {
+        List<City> cities = data.loadCities();
+        gui.showCitysData(cities);
     }
     
 }

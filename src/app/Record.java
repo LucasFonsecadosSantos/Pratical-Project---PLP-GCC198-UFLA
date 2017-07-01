@@ -9,12 +9,14 @@
  */
 package app;
 
+import java.io.Serializable;
+
 /**
  * This public abstract class describes all records information.
  * It contains the common characteristics between the class
  * City and Neighborhood.
  */
-public abstract class Record{
+public abstract class Record implements Serializable{
 
     /**
      * String name attribute;

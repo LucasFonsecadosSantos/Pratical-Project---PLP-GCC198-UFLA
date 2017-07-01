@@ -35,7 +35,7 @@ public class Data implements Serializable {
         successfullyMessage = "[!] SUCCESSFULLY OPERATION!";
     }
     public List<String> loadDisponibleCitys() {
-            File[] citysData = new File("./data/citys").listFiles();
+            File[] citysData = new File("./data/cities").listFiles();
             if(citysData != null) {
                 List<String> citysNames = new ArrayList<String>();
                 for(File f : citysData) {
@@ -48,27 +48,18 @@ public class Data implements Serializable {
                 return null;
             }
     }
-   /* public void loadData(String cityName) {
-        cityName = cityName.toLowerCase();
-        File dataCity = new File("../data/"+cityName+".bin");
-        if(dataCity.isFile()) {
-
-        }else {
-
-        }
-    }*/
 
     public String storeCityData(List<City> citysList) {
         for(City c : citysList) {
             try {
-                File file = new File("./data/citys/"+c.getName()+".bin");
-                if(!new File("./data/citys").exists()) {
-                    new File("./data/citys").mkdirs();
+                File file = new File("./data/cities/"+c.getName()+".bin");
+                if(!new File("./data/cities").exists()) {
+                    new File("./data/cities").mkdirs();
                 }
                 if(!file.exists()) {
                     file.createNewFile();
                 }   
-                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/citys/" + c.getName() + ".bin", true));
+                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + c.getName() + ".bin", true));
                 object.writeObject(c);
             }catch(Exception e) {
                 e.printStackTrace();
@@ -77,4 +68,26 @@ public class Data implements Serializable {
         return successfullyMessage;    
     }
 
-}
+    public List<City> loadCities() {
+        try {
+            File directory = new File("./data/cities");
+            if(!directory.exists()) {
+                System.out.println("caiu aqui");
+                return null;
+            }else {
+                File[] cities = directory.listFiles();
+                List<City> loadedCities = new ArrayList<City>();
+                for(File f : cities) {
+                    ObjectInputStream objectS = new ObjectInputStream(new FileInputStream(f));
+                    City c = (City) objectS.readObject();
+                    loadedCities.add(c);
+                    objectS.close();
+                }
+                return loadedCities;
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+} 
