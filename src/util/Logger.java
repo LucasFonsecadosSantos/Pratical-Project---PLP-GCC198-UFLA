@@ -9,6 +9,30 @@
  */
 package util;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Logger {
-    
+
+    private final String successfullyMessage;
+    private File logsFolder;
+
+    public Logger() {
+        logsFolder = new File("../logs");
+        successfullyMessage = "[!] SUCCESSFULLY MESSAGE!";
+    }
+
+    public String generateActionLog(String action) {
+        return successfullyMessage;
+    }
+
+    public String genereterRecordLog() {
+        return successfullyMessage;
+    }
+
 }

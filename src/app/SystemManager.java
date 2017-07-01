@@ -49,25 +49,19 @@ public class SystemManager {
         String name = "";
         String district = "";
         String country = "";
-        int amount = 0;
-        double PIB = 0;
-        String mayor = "";
+        String currentMayor = "";
 
         for(int i=0; i < contents.size(); i++) {
-            if(i % 6 == 0) {
+            if(i % 4 == 0) {
                 name = contents.get(i);
-            }else if(i % 6 == 1) {
+            }else if(i %4 == 1) {
                 district = contents.get(i);
-            }else if(i % 6 == 2) {
+            }else if(i % 4 == 2) {
                 country = contents.get(i);
-            }else if(i % 6 == 3) {
-                amount = Integer.parseInt(contents.get(i));
-            }else if(i % 6 == 4) {
-                PIB = Integer.parseInt(contents.get(i));
-            }else if(i % 6 == 5) {
-                mayor = contents.get(i);
+            }else if(i % 4 == 3) {
+                currentMayor = contents.get(i);
             }
-            citys.add(new City(name, district, country, amount, PIB, mayor));
+            citys.add(new City(name, district, country, currentMayor));
         }
         System.out.println(citys);
 

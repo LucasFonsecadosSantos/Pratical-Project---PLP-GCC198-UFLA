@@ -9,6 +9,14 @@
  */
 package app;
 
-public class Neighborhood {
+public class Neighborhood extends Record {
     
+    public Neighborhood(String name, int demographicRate, double perCaptaIncome, int crimeRate) {
+        setName(name);
+        setDemographicRate(demographicRate);
+        setPerCaptaIncome(perCaptaIncome);
+        setCrimeRate(crimeRate);
+    }
+
+
 }

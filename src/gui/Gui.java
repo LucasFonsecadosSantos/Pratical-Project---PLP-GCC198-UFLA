@@ -104,13 +104,9 @@ public class Gui {
             informations.add(scanner.nextLine());
             System.out.print(ANSI_WHITE+"[#] Country: "+ANSI_RESET);
             informations.add(scanner.nextLine());
-            System.out.print(ANSI_WHITE+"[#] Amount City Population (Enter a integer value): "+ANSI_RESET);
-            informations.add(scanner.nextLine());
-            System.out.print(ANSI_WHITE+"[#] PIB (Enter a integer or decimal value): "+ANSI_RESET);
-            informations.add(scanner.nextLine());
             System.out.print(ANSI_WHITE+"[#] Current Mayor: "+ANSI_RESET);
             informations.add(scanner.nextLine());
-            System.out.print("[#] Do you want to register a new city [Y/n]?");
+            System.out.print(ANSI_WHITE+"[#] Do you want to register a new city [Y/n]?"+ANSI_RESET);
             option = scanner.nextLine().toLowerCase();
         }while(option.equals("y"));
         pressToContinue();
