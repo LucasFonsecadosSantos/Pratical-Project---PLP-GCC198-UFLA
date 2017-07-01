@@ -21,17 +21,58 @@ public class Logger {
 
     private final String successfullyMessage;
     private File logsFolder;
-
+    private BufferedReader br;
+    private BufferedWriter bw;
     public Logger() {
         logsFolder = new File("../logs");
         successfullyMessage = "[!] SUCCESSFULLY MESSAGE!";
     }
 
+    private void startLog() {
+        SystemDate sd = new SystemDate();
+        try {
+            String currentDate = sd.returnOnlyDate(); //Problem 00:00 SOLVED RS
+            File file = new File("./logs/"+currentDate+".txt");
+            if(!file.exists()) {
+                new File("./logs").mkdirs();
+                file.createNewFile();
+            }
+            br = new BufferedReader(new FileReader("./logs/"+currentDate+".txt"));
+            bw = new BufferedWriter(new FileWriter("./logs/"+currentDate+".txt", true));
+            System.out.println("ainda nao entrou");
+            if(br.readLine() == null) {
+                System.out.println("entrou");
+                bw.newLine();
+                bw.write("+==========================================+\n");
+                bw.write("+           CITY MANAGER LOG FILE          +\n");
+                bw.write("+==========================================+\n");
+                bw.write("+ Developed by Lucas Fonseca dos Santos.   +\n");
+                bw.write("+ Version: 1.0 2017                        +\n");
+                bw.write("+==========================================+\n");
+                bw.write("["+sd.returnCompleteDate()+"]: LOG FILE CREATED! Welcome to my software!\n");
+                bw.close();
+                br.close();
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
     public String generateActionLog(String action) {
+        startLog();
+        SystemDate sd = new SystemDate();
+        try {
+            bw = new BufferedWriter(new FileWriter("./logs/"+sd.returnOnlyDate()+".txt", true));
+            bw.write("["+sd.returnCompleteDate()+"/ACTION]: "+action+" ;\n");
+            bw.close();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
         return successfullyMessage;
     }
 
     public String genereterRecordLog() {
+        startLog();
         return successfullyMessage;
     }
 

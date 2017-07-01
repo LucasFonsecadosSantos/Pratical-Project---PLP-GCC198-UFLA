@@ -11,6 +11,7 @@ package app;
 
 import gui.Gui;
 import util.Data;
+import util.Logger;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -18,14 +19,16 @@ public class SystemManager {
 
     private Gui gui;
     private Data data;
+    private Logger logger;
 
     public SystemManager() {
         gui = new Gui();
         data = new Data();
+        logger = new Logger();
     }
 
     public void execute() {
-
+        logger.generateActionLog("SYSTEM STARTED!");
         String option = "";
         List<String> dataCitysName = data.loadDisponibleCitys();
         while(!option.equals("-99")) {
@@ -63,7 +66,7 @@ public class SystemManager {
             }
             citys.add(new City(name, district, country, currentMayor));
         }
-        System.out.println(citys);
+        data.storeCityData(citys);
 
     }
     

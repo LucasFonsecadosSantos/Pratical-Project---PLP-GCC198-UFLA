@@ -13,16 +13,27 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import app.City;
+import app.Neighborhood;
 
 public class Data {
     
+    private final String successfullyMessage;
+
+    public Data() {
+        successfullyMessage = "[!] SUCCESSFULLY OPERATION!";
+    }
     public List<String> loadDisponibleCitys() {
-            File[] citysData = new File("./data").listFiles();
+            File[] citysData = new File("./data/citys").listFiles();
             if(citysData != null) {
                 List<String> citysNames = new ArrayList<String>();
                 for(File f : citysData) {
@@ -35,7 +46,7 @@ public class Data {
                 return null;
             }
     }
-    public void loadData(String cityName) {
+   /* public void loadData(String cityName) {
         cityName = cityName.toLowerCase();
         File dataCity = new File("../data/"+cityName+".bin");
         if(dataCity.isFile()) {
@@ -43,6 +54,19 @@ public class Data {
         }else {
 
         }
+    }*/
+
+    public String storeCityData(List<City> citysList) {
+        for(City c : citysList) {
+            try {
+                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/citys/" + c.getName() + ".bin"));
+                object.writeObject(c);
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return successfullyMessage;
+        
     }
 
 }

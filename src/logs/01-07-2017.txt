@@ -1,0 +1,9 @@
+
++==========================================+
++           CITY MANAGER LOG FILE          +
++==========================================+
++ Developed by Lucas Fonseca dos Santos.   +
++ Version: 1.0 2017                        +
++==========================================+
+[01-07-2017]: LOG FILE CREATED! Welcome to my software!
+[01-07-2017/ACTION]: SYSTEM STARTED! ;
