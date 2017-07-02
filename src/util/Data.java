@@ -34,16 +34,16 @@ public class Data implements Serializable {
     public Data() {
         successfullyMessage = "[!] SUCCESSFULLY OPERATION!";
     }
-    public List<String> loadDisponibleCitys() {
-            File[] citysData = new File("./data/cities").listFiles();
-            if(citysData != null) {
-                List<String> citysNames = new ArrayList<String>();
-                for(File f : citysData) {
+    public List<String> loadDisponibleCities() {
+            File[] citiesData = new File("./data/cities").listFiles();
+            if(citiesData != null) {
+                List<String> citiesNames = new ArrayList<String>();
+                for(File f : citiesData) {
                     if(f.isFile()) {
-                        citysNames.add(f.getName());
+                        citiesNames.add(f.getName());
                     }
                 }
-                return citysNames;
+                return citiesNames;
             }else {
                 return null;
             }

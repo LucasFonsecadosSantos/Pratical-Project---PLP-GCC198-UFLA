@@ -83,6 +83,11 @@ public class City extends Record {
         this.country = country.toLowerCase();
     }
 
+    /**
+     * Country name string attribute state accessor method.
+     * 
+     * @return String String country name.
+     */
     public String getCountry() {
         return this.country;
     }

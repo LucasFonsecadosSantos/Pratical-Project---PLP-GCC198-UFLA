@@ -31,7 +31,7 @@ public class SystemManager {
     public void execute() {
         logger.generateActionLog("SYSTEM STARTED!");
         String option = "";
-        List<String> dataCitysName = data.loadDisponibleCitys();
+        List<String> dataCitiesName = data.loadDisponibleCities();
         while(!option.equals("-99")) {
             option = gui.callMenu();
             switch(option) {
@@ -39,7 +39,10 @@ public class SystemManager {
                     createNewCity();
                     break;
                 case "3":
-                    loadAllCitys();
+                    loadAllCities();
+                    break;
+                case "5":
+                    cityManager(gui.captureCity());
                     break;
                 default:
                     break;
@@ -50,7 +53,7 @@ public class SystemManager {
 
     public void createNewCity() {
         List<String> contents = gui.createCityInformations();
-        List<City> citys = new ArrayList<City>();
+        List<City> cities = new ArrayList<City>();
         int count = 0;
 
         String name = "";
@@ -68,14 +71,89 @@ public class SystemManager {
             }else if(i % 4 == 3) {
                 currentMayor = contents.get(i);
             }
-            citys.add(new City(name, district, country, currentMayor));
+            cities.add(new City(name, district, country, currentMayor));
         }
-        data.storeCityData(citys);
+        data.storeCityData(cities);
     }
 
-    public void loadAllCitys() {
+    public void loadAllCities() {
         List<City> cities = data.loadCities();
-        gui.showCitysData(cities);
+        gui.showCitiesData(cities);
     }
-    
+
+    public void cityManager(String cityName) {
+        List<City> cities = data.loadCities();
+        City city = null;
+        for(City c : cities) {
+            if(c.getName().equals(cityName)) {
+                city = c;
+                break;
+            }
+        }
+
+        String option = "0";
+
+        while(!option.equals("-99")) {
+            option = gui.callCityManager(city);
+            switch(option) {
+                case "1":
+                    gui.showCitiesData(city);
+                    break;
+                case "2":
+                    addNewNeighborhood(city);
+                    break;
+                case "3":
+                    removeNeighborhood(city);
+                    break;
+                case "4":
+                    editNeighborhood(city);
+                    break;
+                case "5":
+                    generateStatisticsReport(city);
+                    break;
+                case "-99":
+                    return;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void addNewNeighborhood(City c) {
+        List<String> informations = gui.addNewNeighborhoodInformations();
+        List<Neighborhood> neighborhoods = new ArrayList<Neighborhood>();
+        String name = "";
+        int demographicRate = 0;
+        double perCaptaIncome = 0;
+        int crimeRate = 0;
+
+        for(int i=0; i < informations.size(); i++) {
+            if(i % 4 == 0) {
+                name = informations.get(i);
+            }else if(i % 4 == 1) {
+                demographicRate = Integer.parseInt(informations.get(i));
+            }else if(i % 4 == 2) {
+                perCaptaIncome = Double.parseDouble(informations.get(i));
+            }else if(i % 4 == 3) {
+                crimeRate = Integer.parseInt(informations.get(i));
+            }
+            neighborhoods.add(new Neighborhood(name, demographicRate, perCaptaIncome, crimeRate));
+        }
+
+        for(Neighborhood n : neighborhoods) {
+            c.addNeighborhood(n);
+        }
+    }
+
+    public void removeNeighborhood(City c) {
+
+    }
+
+    public void editNeighborhood(City c) {
+
+    }
+
+    public void generateStatisticsReport(City c) {
+
+    }
 }

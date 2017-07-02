@@ -78,8 +78,38 @@ public class Gui {
         System.out.print("[#] ENTER YOUR OPTION: ");
         try {
             return scanner.nextLine();
-        }catch(NumberFormatException nfe) {
+        }catch (NumberFormatException nfe) {
             nfe.printStackTrace();
+            return "-99";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "-99";
+        }
+    }
+
+    public String callCityManager(City city) {
+        System.out.println("+--------------------------------------------------+");
+        System.out.println(city.getName());
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+                                                  +");
+        System.out.println("+ What do you want with this city?                 +");
+        System.out.println("+ [1] Show city informations;                      +");
+        System.out.println("+ [2] Add a new neighborhood;                      +");
+        System.out.println("+ [3] Remove a neighborhood;                       +");
+        System.out.println("+ [4] Edit a neighborhood;                         +");
+        System.out.println("+ [5] Generate statistcs report file               +");
+        System.out.println("+                                                  +");
+        System.out.println("+ [-99] Back to main menu                          +");
+        System.out.println("+                                                  +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.print("[#] ENTER YOUR OPTION: ");
+        try {
+            return scanner.nextLine();
+        }catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+            return "-99";
+        }catch (Exception e) {
+            e.printStackTrace();
             return "-99";
         }
     }
@@ -101,22 +131,22 @@ public class Gui {
             System.out.println(ANSI_GREEN+"+ REGISTER A NEW CITY                              +"+ANSI_RESET);
             System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
             System.out.println(ANSI_YELLOW+"[!] The neighborhoods will be add after this process;"+ANSI_RESET);
-            System.out.print(ANSI_WHITE+"[#] City Name: "+ANSI_RESET);
+            System.out.print(ANSI_WHITE+"[#] CITY NAME: "+ANSI_RESET);
             informations.add(scanner.nextLine());
-            System.out.print(ANSI_WHITE+"[#] State/District: "+ANSI_RESET);
+            System.out.print(ANSI_WHITE+"[#] STATE/PROVINCE/DISTRICT: "+ANSI_RESET);
             informations.add(scanner.nextLine());
-            System.out.print(ANSI_WHITE+"[#] Country: "+ANSI_RESET);
+            System.out.print(ANSI_WHITE+"[#] COUNTRY: "+ANSI_RESET);
             informations.add(scanner.nextLine());
-            System.out.print(ANSI_WHITE+"[#] Current Mayor: "+ANSI_RESET);
+            System.out.print(ANSI_WHITE+"[#] CURRENT MAYOR: "+ANSI_RESET);
             informations.add(scanner.nextLine());
-            System.out.print(ANSI_WHITE+"[#] Do you want to register a new city [Y/n]?"+ANSI_RESET);
+            System.out.print(ANSI_WHITE+"[#] DO YOU WANT TO REGISTER A NEW CITY? [Y/n]?"+ANSI_RESET);
             option = scanner.nextLine().toLowerCase();
         }while(option.equals("y"));
         pressToContinue();
         return informations;
     }
 
-    public void showCitysData(List<City> cities) {
+    public void showCitiesData(List<City> cities) {
         clear();
         List<Neighborhood> neighborhoodList;
         System.out.println("+--------------------------------------------------+");
@@ -138,4 +168,59 @@ public class Gui {
         pressToContinue();
     }
 
+    public void showCitiesData(City c) {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ REGISTERED CITY INFORMATIONS                     +");
+        System.out.println("+--------------------------------------------------+");
+        
+            System.out.println("\n+ CITY NAME: " +c.getName());
+            System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
+            System.out.println("+ COUNTRY: " +c.getCountry());
+            System.out.println("+ CURRENT MAYOR: " +c.getMayor());
+            System.out.println("+ DEMOGRAPHIC RATE: " + c.getDemographicRate());
+            System.out.println("+ PER CAPTA INCOME RATE: " + c.getPerCaptaIncome());
+            System.out.println("+ CRIME RATE: " + c.getCrimeRate());
+            System.out.println("+ NEIGHBORHOODS: ");
+            List<Neighborhood> neighborhoodList = c.getNeighborhoods();
+            if(neighborhoodList != null) {
+                for(Neighborhood n : neighborhoodList) {
+                    System.out.println(n.toString());
+                }
+            }
+        
+        pressToContinue();
+    }
+    public String captureCity() {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ WELCOME TO THE CITY MANAGER!                     +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.print("[#] WHAT IS THE CITY NAME: ");
+        return scanner.nextLine();
+    }
+
+    public List<String> addNewNeighborhoodInformations() {
+        clear();
+        String option = "y";
+        List<String> informations = new ArrayList<String>();
+        do {
+            System.out.println("+--------------------------------------------------+");
+            System.out.println("+ REGISTER A NEW NEIGHBORHOOD                      +");
+            System.out.println("+--------------------------------------------------+");
+            System.out.println(ANSI_YELLOW+"[!] After that, the statistcs rates will be updated;"+ANSI_RESET);
+            System.out.print("[#] NEIGHBORHOOD NAME: ");
+            informations.add(scanner.nextLine().toLowerCase());
+            System.out.print("[#] DEMOGRAPHIC RATE: ");
+            informations.add(scanner.nextLine().toLowerCase());
+            System.out.print("[#] PER CAPTA INCOME RATE: ");
+            informations.add(scanner.nextLine().toLowerCase());
+            System.out.print("[#] CRIME RATE: ");
+            informations.add(scanner.nextLine().toLowerCase());
+            System.out.print(ANSI_WHITE+"[#] DO YOU WANT TO REGISTER A NEW NEIGHBORHOOD? [Y/n]?"+ANSI_RESET);
+            option = scanner.nextLine().toLowerCase();
+        } while(option.equals("y"));
+        pressToContinue();
+        return informations;
+    }
 }

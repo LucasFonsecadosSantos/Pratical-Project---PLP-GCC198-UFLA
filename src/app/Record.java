@@ -83,14 +83,29 @@ public abstract class Record implements Serializable{
         return this.crimeRate;
     }
 
+    /**
+     * Demographic rate attribute state modifier.
+     * 
+     * @param demographicRate Integer demographic rate value.
+     */
     public void setDemographicRate(int demographicRate) {
         this.demographicRate = demographicRate;
     }
 
+    /**
+     * Per Capta Income attribute state modifier method.
+     * 
+     * @param perCaptaRate Double per capta rate value.
+     */
     public void setPerCaptaIncome(double perCaptaRate) {
         this.perCaptaIncome = perCaptaRate;
     }
 
+    /**
+     * Crime rate attribute state modifier method.
+     * 
+     * @param crimeRate Integer crime rate value.
+     */
     public void setCrimeRate(int crimeRate) {
         this.crimeRate = crimeRate;
     }
