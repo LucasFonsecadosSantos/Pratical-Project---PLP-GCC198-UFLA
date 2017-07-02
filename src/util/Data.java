@@ -27,13 +27,34 @@ import app.City;
 import app.Neighborhood;
 import java.io.Serializable;
 
+/**
+ * This class describes the data object. It is responsible
+ * for the access to secondary memory. It reads and writes in
+ * binary files data.
+ * The serializable interface was implemented here.
+ */
 public class Data implements Serializable {
     
+    /**
+     * Successfully message string attribute.
+     */
     private final String successfullyMessage;
 
+    /**
+     * Data object constructor. He attributes a state to
+     * successfully message attribute.
+     */
     public Data() {
         successfullyMessage = "[!] SUCCESSFULLY OPERATION!";
     }
+
+    /**
+     * This method loads all data binary files presents in cities/
+     * directory. He returns a List<String> java data structure
+     * with all files name.
+     * 
+     * @return List<String> Java list with all files name.
+     */
     public List<String> loadDisponibleCities() {
             File[] citiesData = new File("./data/cities").listFiles();
             if(citiesData != null) {
@@ -49,8 +70,15 @@ public class Data implements Serializable {
             }
     }
 
-    public String storeCityData(List<City> citysList) {
-        for(City c : citysList) {
+    /**
+     * This method sotres a city record in the data binary
+     * file, located in the cities/ directory.
+     * 
+     * @param cityList Java list data structure with cities object to be stored.
+     * @return String Successfully message about the operation.
+     */
+    public String storeCityData(List<City> citiesList) {
+        for(City c : citiesList) {
             try {
                 File file = new File("./data/cities/"+c.getName()+".bin");
                 if(!new File("./data/cities").exists()) {
@@ -68,11 +96,17 @@ public class Data implements Serializable {
         return successfullyMessage;    
     }
 
+    /**
+     * This method is responsible for load a city data stored in
+     * binary data file. He returns a java list data structure with
+     * all cities loaded.
+     * 
+     * @return List<City> Java list data structure with all cities loaded.
+     */
     public List<City> loadCities() {
         try {
             File directory = new File("./data/cities");
             if(!directory.exists()) {
-                System.out.println("caiu aqui");
                 return null;
             }else {
                 File[] cities = directory.listFiles();
@@ -89,5 +123,16 @@ public class Data implements Serializable {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteAllFiles() {
+        try {
+            File[] files = new File("./data/cities").listFiles();
+            for(File f : files) {
+                f.delete();
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 } 

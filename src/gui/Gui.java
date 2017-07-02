@@ -17,36 +17,123 @@ import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class is reponsible to dialog between the system and 
+ * the final user. He prints and loads screen information for
+ * the system processing this.
+ */
 public class Gui {
 
+    /**
+     * Scanner java object attribute;
+     */
     private Scanner scanner;
+
+    /**
+     * Reset terminal font color code attribute;
+     */
     private static final String ANSI_RESET = "\u001B[0m";
+
+    /**
+     * Black terminal font color code attribute;
+     */
     private static final String ANSI_BLACK = "\u001B[30m";
+    
+    /**
+     * Red terminal font color code attribute;
+     */
     private static final String ANSI_RED = "\u001B[31m";
+    
+    /**
+     * Green terminal font color code attribute;
+     */
     private static final String ANSI_GREEN = "\u001B[32m";
+    
+    /**
+     * Yellow terminal font color code attribute;
+     */
     private static final String ANSI_YELLOW = "\u001B[33m";
+    
+    /**
+     * Blue terminal font color code attribute;
+     */
     private static final String ANSI_BLUE = "\u001B[34m";
+    
+    /**
+     * Purple terminal font color code attribute;
+     */
     private static final String ANSI_PURPLE = "\u001B[35m";
+    
+    /**
+     * Cyan terminal font color code attribute;
+     */
     private static final String ANSI_CYAN = "\u001B[36m";
+    
+    /**
+     * White terminal font color code attribute;
+     */
     private static final String ANSI_WHITE = "\u001B[37m";
+    
+    /**
+     * Background terminal black color code attribute;
+     */
     private static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    
+    /**
+     * Background terminal red color code attribute;
+     */
     private static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    
+    /**
+     * Background terminal green color code attribute;
+     */
     private static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    
+    /**
+     * Background terminal yellow color code attribute;
+     */
     private static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    
+    /**
+     * Background terminal blue color code attribute;
+     */
     private static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    
+    /**
+     * Background terminal purple color code attribute;
+     */
     private static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    
+    /**
+     * Background terminal cyan color code attribute;
+     */
     private static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    
+    /**
+     * Background terminal white color code attribute;
+     */
     private static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+    /**
+     * GUI object constructor. He instaces java scanner object
+     * to capture the user inputs.
+     */
     public Gui() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Static method to clear the terminal console.
+     */
     public static void clear() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
-     } 
+     }
 
+     /**
+     * Static method, responsible for says to the user
+     * press any key to continue;
+     */
     public static void pressToContinue() {
         System.out.println("[#] Press any key to continue...");
         try { 
@@ -56,6 +143,12 @@ public class Gui {
         }
     }
 
+    /**
+     * This method shows and captures all informations to execute
+     * the system. He is called when the system is started.
+     * 
+     * @return String Option chosen by the user.
+     */
     public String callMenu(){
         clear();
         System.out.println("+==================================================+");
@@ -71,6 +164,7 @@ public class Gui {
         System.out.println("+ [4] Edit a city;                                 +");
         System.out.println("+ [5] Enter a city to manager it;                  +");
         System.out.println("+ [6] Print out;                                   +");
+        System.out.println("+ [7] Delete Data Files;                           +");
         System.out.println("+                                                  +");
         System.out.println("+ [-99] EXIT                                       +");
         System.out.println("+                                                  +");
@@ -88,6 +182,7 @@ public class Gui {
     }
 
     public String callCityManager(City city) {
+        clear();
         System.out.println("+--------------------------------------------------+");
         System.out.println(city.getName());
         System.out.println("+--------------------------------------------------+");
@@ -173,22 +268,20 @@ public class Gui {
         System.out.println("+--------------------------------------------------+");
         System.out.println("+ REGISTERED CITY INFORMATIONS                     +");
         System.out.println("+--------------------------------------------------+");
-        
-            System.out.println("\n+ CITY NAME: " +c.getName());
-            System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
-            System.out.println("+ COUNTRY: " +c.getCountry());
-            System.out.println("+ CURRENT MAYOR: " +c.getMayor());
-            System.out.println("+ DEMOGRAPHIC RATE: " + c.getDemographicRate());
-            System.out.println("+ PER CAPTA INCOME RATE: " + c.getPerCaptaIncome());
-            System.out.println("+ CRIME RATE: " + c.getCrimeRate());
-            System.out.println("+ NEIGHBORHOODS: ");
-            List<Neighborhood> neighborhoodList = c.getNeighborhoods();
-            if(neighborhoodList != null) {
-                for(Neighborhood n : neighborhoodList) {
-                    System.out.println(n.toString());
-                }
+        System.out.println("\n+ CITY NAME: " +c.getName());
+        System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
+        System.out.println("+ COUNTRY: " +c.getCountry());
+        System.out.println("+ CURRENT MAYOR: " +c.getMayor());
+        System.out.println("+ DEMOGRAPHIC RATE: " + c.getDemographicRate());
+        System.out.println("+ PER CAPTA INCOME RATE: " + c.getPerCaptaIncome());
+        System.out.println("+ CRIME RATE: " + c.getCrimeRate());
+        System.out.println("+ NEIGHBORHOODS: ");
+        List<Neighborhood> neighborhoodList = c.getNeighborhoods();
+        if(neighborhoodList != null) {
+            for(Neighborhood n : neighborhoodList) {
+                System.out.println(n.toString());
             }
-        
+        }
         pressToContinue();
     }
     public String captureCity() {
@@ -201,10 +294,10 @@ public class Gui {
     }
 
     public List<String> addNewNeighborhoodInformations() {
-        clear();
         String option = "y";
         List<String> informations = new ArrayList<String>();
         do {
+            clear();
             System.out.println("+--------------------------------------------------+");
             System.out.println("+ REGISTER A NEW NEIGHBORHOOD                      +");
             System.out.println("+--------------------------------------------------+");
@@ -222,5 +315,32 @@ public class Gui {
         } while(option.equals("y"));
         pressToContinue();
         return informations;
+    }
+
+    public String deleteDataFilesInformations() {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ DELETE ALL RECORDS                               +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.println(ANSI_YELLOW+"[!] All your saved data in the system will be erased;"+ANSI_RESET);
+        System.out.print("[#] DO YOU WANT TO CONTINUE [Y/n]: ");
+        return scanner.nextLine().toLowerCase();
+    }
+
+    public List<String> removeNeighborhoodInformations() {
+        String option = "y";
+        List<String> names = new ArrayList<String>();
+        do {
+            clear();
+            System.out.println("+--------------------------------------------------+");
+            System.out.println("+ REMOVE A NEIGHBORHOODS                           +");
+            System.out.println("+--------------------------------------------------+");
+            System.out.println(ANSI_YELLOW+"[!] Your saved data in the system will be erased;"+ANSI_RESET);
+            System.out.print("[#] WHICH NEIGHBORHOOD DO YOU WANT TO REMOVE? TYPE THE  NEIGHBORHOOD NAME: ");
+            names.add(scanner.nextLine());
+            System.out.println("[#] DO YOU WANT TO REMOVE MORE NEIGHBORHOODS? [Y/n]: ");
+            option = scanner.nextLine().toLowerCase();
+        }while (option.equals("y"));
+        return names;
     }
 }

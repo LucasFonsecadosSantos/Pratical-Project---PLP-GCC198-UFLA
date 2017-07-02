@@ -44,6 +44,9 @@ public class SystemManager {
                 case "5":
                     cityManager(gui.captureCity());
                     break;
+                case "7":
+                    deleteDataFiles();
+                    break;
                 default:
                     break;
             }
@@ -126,18 +129,24 @@ public class SystemManager {
         int demographicRate = 0;
         double perCaptaIncome = 0;
         int crimeRate = 0;
-
-        for(int i=0; i < informations.size(); i++) {
-            if(i % 4 == 0) {
-                name = informations.get(i);
-            }else if(i % 4 == 1) {
-                demographicRate = Integer.parseInt(informations.get(i));
-            }else if(i % 4 == 2) {
-                perCaptaIncome = Double.parseDouble(informations.get(i));
-            }else if(i % 4 == 3) {
-                crimeRate = Integer.parseInt(informations.get(i));
+        
+        int count = 0;
+        for(String s : informations) {
+            count++;
+            if(count == 5) {
+                count = 1;
             }
-            neighborhoods.add(new Neighborhood(name, demographicRate, perCaptaIncome, crimeRate));
+            if(count == 1) {
+                name = s;
+            }else if(count == 2) {
+                demographicRate = Integer.parseInt(s);
+            }else if(count == 3) {
+                perCaptaIncome = Double.parseDouble(s);
+            }else if(count == 4) {
+                crimeRate = Integer.parseInt(s);
+                neighborhoods.add(new Neighborhood(name, demographicRate, perCaptaIncome, crimeRate));
+            }
+
         }
 
         for(Neighborhood n : neighborhoods) {
@@ -146,7 +155,18 @@ public class SystemManager {
     }
 
     public void removeNeighborhood(City c) {
-
+        List<String> names = gui.removeNeighborhoodInformations();
+        List<Neighborhood> neighborhoods = c.getNeighborhoods();
+        for(Neighborhood n : neighborhoods) {
+            for(String s : names) {
+                if(n.getName().equals(s)) {
+                    neighborhoods.remove(n);
+                }
+            }
+        }
+        gui.pressToContinue();
+        return;
+        
     }
 
     public void editNeighborhood(City c) {
@@ -155,5 +175,19 @@ public class SystemManager {
 
     public void generateStatisticsReport(City c) {
 
+    }
+
+    public void deleteDataFiles() {
+        String option = gui.deleteDataFilesInformations();
+        gui.clear();
+        if(option.equals("y")) {
+            System.out.println("+ [...] DELETING ALL YOUR DATA...");
+            data.deleteAllFiles();
+            System.out.println("+ [!] YOUR DATA WAS BEEN DELETED!");
+            gui.pressToContinue();
+            return;
+        }else {
+            return;
+        }
     }
 }
