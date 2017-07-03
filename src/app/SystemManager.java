@@ -14,6 +14,7 @@ import util.Data;
 import util.Logger;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class SystemManager {
@@ -21,11 +22,13 @@ public class SystemManager {
     private Gui gui;
     private Data data;
     private Logger logger;
+    private Scanner scanner;
 
     public SystemManager() {
         gui = new Gui();
         data = new Data();
         logger = new Logger();
+        scanner = new Scanner(System.in);
     }
 
     public void execute() {
@@ -46,6 +49,9 @@ public class SystemManager {
                     break;
                 case "7":
                     deleteDataFiles();
+                    break;
+                case "4":
+                    editCity();
                     break;
                 default:
                     break;
@@ -152,6 +158,7 @@ public class SystemManager {
         for(Neighborhood n : neighborhoods) {
             c.addNeighborhood(n);
         }
+        data.storeCityData(c);
     }
 
     public void removeNeighborhood(City c) {
@@ -188,6 +195,38 @@ public class SystemManager {
             return;
         }else {
             return;
+        }
+    }
+
+    public void editCity() {
+        String nameCity = gui.editCityInformations(data.loadDisponibleCities());
+        List<City> cities = data.loadCities();
+        for(City c : cities) {
+            if(c.getName().equals(nameCity)) {
+                switch(gui.editCityInformations(c)) {
+                    case 1:
+                        gui.clear();
+                        System.out.println("+--------------------------------------------------+");
+                        System.out.println("+ CITY NAME                                        +");
+                        System.out.println("+--------------------------------------------------+");
+                        System.out.println("[!] CURRENT CITY NAME: "+c.getName());
+                        boolean control = true;
+                        List<String> names = data.loadDisponibleCities();
+                        System.out.print("[#] ENTER A NEW CITY NAME: ");
+                        String newName;
+                        do {
+                            newName = scanner.nextLine().toLowerCase();
+                            for(String s : names) {
+                                if(newName.equals(s)) {
+                                    System.out.println("[!] SORRY, BUT THIS NAME EXISTIS! CHOOSE A NEW NAME AGAIN!");
+                                    control = false;    
+                                }
+                            }
+                        }while(!control);
+                        c.setName(newName);
+                        System.out.println(data.storeCityData(c));
+                }
+            }
         }
     }
 }

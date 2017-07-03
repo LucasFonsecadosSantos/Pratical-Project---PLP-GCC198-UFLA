@@ -343,4 +343,50 @@ public class Gui {
         }while (option.equals("y"));
         return names;
     }
+
+    public String editCityInformations(List<String> citiesName) {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ EDIT A CITY RECORD                               +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("[!] DISPONIBLE CITIES TO EDIT: ");
+        int count = 0;
+        for(String c : citiesName) {
+            count++;
+            System.out.println("["+count+"]: "+c+ ";");
+        }
+        System.out.print("[#] WHICH CITY DO YOU WANT TO EDIT? [Type city name]: ");
+        return scanner.nextLine().toLowerCase();
+    }
+
+    public int editCityInformations(City c) {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ EDIT A CITY RECORD                               +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ [!] INFORMATIONS ABOUT THE CITY:                 +");
+        System.out.println("\n[1] CITY NAME: " +c.getName());
+        System.out.println("[2] STATE/DISTRICT: " +c.getDistrict());
+        System.out.println("[3] COUNTRY: " +c.getCountry());
+        System.out.println("[4] CURRENT MAYOR: " +c.getMayor());
+        System.out.println("[5] DEMOGRAPHIC RATE: " + c.getDemographicRate());
+        System.out.println("[6] PER CAPTA INCOME RATE: " + c.getPerCaptaIncome());
+        System.out.println("[7] CRIME RATE: " + c.getCrimeRate());
+        System.out.println("[8] NEIGHBORHOODS: ");
+        List<Neighborhood> neighborhoodList = c.getNeighborhoods();
+        if(neighborhoodList != null) {
+            for(Neighborhood n : neighborhoodList) {
+                System.out.println(n.toString());
+            }
+        }
+        System.out.println("[#] WHICH INFORMATION ABOUT THE "+c.getName()+" CITY?");
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        }catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

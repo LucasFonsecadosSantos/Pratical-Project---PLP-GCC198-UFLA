@@ -97,6 +97,31 @@ public class Data implements Serializable {
     }
 
     /**
+     * This method sotres a city record in the data binary
+     * file, located in the cities/ directory.
+     * 
+     * @param cityList Java list data structure with cities object to be stored.
+     * @return String Successfully message about the operation.
+     */
+    public String storeCityData(City city) {
+        try {
+            File file = new File("./data/cities/"+city.getName()+".bin");
+            if(!new File("./data/cities").exists()) {
+                new File("./data/cities").mkdirs();
+            }
+            if(!file.exists()) {
+                file.createNewFile();
+            }   
+            ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + city.getName() + ".bin", true));
+            object.writeObject(city);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return successfullyMessage;    
+    }
+
+    /**
      * This method is responsible for load a city data stored in
      * binary data file. He returns a java list data structure with
      * all cities loaded.
