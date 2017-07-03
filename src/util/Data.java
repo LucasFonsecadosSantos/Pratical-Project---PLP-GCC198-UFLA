@@ -27,6 +27,9 @@ import app.City;
 import app.Neighborhood;
 import java.io.Serializable;
 
+
+//apagar
+import gui.Gui;
 /**
  * This class describes the data object. It is responsible
  * for the access to secondary memory. It reads and writes in
@@ -51,10 +54,10 @@ public class Data implements Serializable {
 
     /**
      * This method loads all data binary files presents in cities/
-     * directory. He returns a List<String> java data structure
+     * directory. He returns a List java data structure
      * with all files name.
      * 
-     * @return List<String> Java list with all files name.
+     * @return List Java list with all files name.
      */
     public List<String> loadDisponibleCities() {
             File[] citiesData = new File("./data/cities").listFiles();
@@ -75,10 +78,12 @@ public class Data implements Serializable {
      * This method sotres a city record in the data binary
      * file, located in the cities/ directory.
      * 
-     * @param cityList Java list data structure with cities object to be stored.
+     * @param citiesList Java list data structure with cities object to be stored.
      * @return String Successfully message about the operation.
      */
     public String storeCityData(List<City> citiesList) {
+        System.out.println(citiesList);
+        Gui.pressToContinue();
         for(City c : citiesList) {
             try {
                 File file = new File("./data/cities/"+c.getName()+".bin");
@@ -89,7 +94,10 @@ public class Data implements Serializable {
                     file.createNewFile();
                 }   
                 ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + c.getName() + ".bin", true));
+                System.out.println(c);
+                Gui.pressToContinue();
                 object.writeObject(c);
+                object.close();
             }catch(Exception e) {
                 e.printStackTrace();
             }
@@ -101,7 +109,7 @@ public class Data implements Serializable {
      * This method sotres a city record in the data binary
      * file, located in the cities/ directory.
      * 
-     * @param cityList Java list data structure with cities object to be stored.
+     * @param city City object.
      * @return String Successfully message about the operation.
      */
     public String storeCityData(City city) {
@@ -128,7 +136,7 @@ public class Data implements Serializable {
      * binary data file. He returns a java list data structure with
      * all cities loaded.
      * 
-     * @return List<City> Java list data structure with all cities loaded.
+     * @return List Java list data structure with all cities loaded.
      */
     public List<City> loadCities() {
         try {

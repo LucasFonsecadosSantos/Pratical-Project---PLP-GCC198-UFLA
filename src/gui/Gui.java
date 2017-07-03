@@ -216,7 +216,7 @@ public class Gui {
      * on system data. He can add how many citys the user
      * wants.
      * 
-     * @return List<String> New citys registered.
+     * @return List New citys registered.
      */
     public List<String> createCityInformations() {
         List<String> informations = new ArrayList<String>();

@@ -103,26 +103,34 @@ public class SystemManager {
     public void createNewCity() {
         List<String> contents = gui.createCityInformations();
         List<City> cities = new ArrayList<City>();
-        int count = 0;
+        int count = -1;
 
         String name = "";
         String district = "";
         String country = "";
         String currentMayor = "";
 
-        for(int i=0; i < contents.size(); i++) {
-            if(i % 4 == 0) {
-                name = contents.get(i);
-            }else if(i %4 == 1) {
-                district = contents.get(i);
-            }else if(i % 4 == 2) {
-                country = contents.get(i);
-            }else if(i % 4 == 3) {
-                currentMayor = contents.get(i);
+        System.out.println(contents);
+        gui.pressToContinue();
+        for(String s : contents) {
+            count++;
+            if(count == 4) {
+                count = 0;
+            }else if(count == 0) {
+                name = s;
+            }else if(count == 1) {
+                district = s;
+            }else if(count == 2) {
+                country = s; 
+            }else if(count == 3) {
+                currentMayor = s;
+                cities.add(new City(name, district, country, currentMayor));
+                continue;
             }
-            cities.add(new City(name, district, country, currentMayor));
         }
-        data.storeCityData(cities);
+        System.out.println(cities);
+        gui.pressToContinue();
+        System.out.println(data.storeCityData(cities));
     }
 
     /**
@@ -342,14 +350,18 @@ public class SystemManager {
     public void generateStatisticsReport(City c) {
 
     }
-
+    
+    /**
+     * This method when is called delete all binary database files.
+     * He does cleaning the cities directory.
+     */
     public void deleteDataFiles() {
         String option = gui.deleteDataFilesInformations();
         gui.clear();
         if(option.equals("y")) {
-            System.out.println("+ [...] DELETING ALL YOUR DATA...");
+            System.out.println("[...] DELETING ALL YOUR DATA...");
             data.deleteAllFiles();
-            System.out.println("+ [!] YOUR DATA WAS BEEN DELETED!");
+            System.out.println("[!] YOUR DATA WAS BEEN DELETED!");
             gui.pressToContinue();
             return;
         }else {
@@ -357,6 +369,11 @@ public class SystemManager {
         }
     }
 
+    /**
+     * This method is responsible for editing a city attribute states object.
+     * He captures the attribute that user chosen to change and apply the changes
+     * into city.
+     */
     public void editCity() {
         List<City> cities = data.loadCities();
         boolean control_1 = true;
@@ -500,6 +517,9 @@ public class SystemManager {
         return;
     }
 
+    /**
+     * This method is responsible for searching a neighborhood in b
+     */
     public void searchNeighborhood() {
         String key = gui.searchNeighborhoodInformations();
         List<City> cities = data.loadCities();
