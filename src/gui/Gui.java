@@ -10,7 +10,6 @@
 package gui;
 
 import java.util.Scanner;
-
 import app.Neighborhood;
 import app.City;
 import java.util.List;
@@ -163,8 +162,10 @@ public class Gui {
         System.out.println("+ [3] Load all registereds citys;                  +");
         System.out.println("+ [4] Edit a city;                                 +");
         System.out.println("+ [5] Enter a city to manager it;                  +");
-        System.out.println("+ [6] Print out;                                   +");
-        System.out.println("+ [7] Delete Data Files;                           +");
+        System.out.println("+ [6] Search a City;                               +");
+        System.out.println("+ [7] Search a Neighborhood;                       +");
+        System.out.println("+ [8] Generate statistics;                         +");
+        System.out.println("+ [9] Delete Data Files;                           +");
         System.out.println("+                                                  +");
         System.out.println("+ [-99] EXIT                                       +");
         System.out.println("+                                                  +");
@@ -353,7 +354,7 @@ public class Gui {
         int count = 0;
         for(String c : citiesName) {
             count++;
-            System.out.println("["+count+"]: "+c+ ";");
+            System.out.println("["+count+"]: "+c.replace(".bin", "").toUpperCase()+ ";");
         }
         System.out.print("[#] WHICH CITY DO YOU WANT TO EDIT? [Type city name]: ");
         return scanner.nextLine().toLowerCase();
@@ -388,5 +389,73 @@ public class Gui {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public String editNeighborhoodInformations(List<Neighborhood> neighborhoods) {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ EDIT A NEIGHBORHOOD                              +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("[!] DISPONIBLE NEIGHBORHOODS TO EDIT: ");
+        int count = 0;
+        for(Neighborhood n : neighborhoods) {
+            count++;
+            System.out.println("["+count+"]: "+n.getName().toUpperCase()+ ";");
+        }
+        System.out.print("[#] WHICH NEIGHBORHOOD DO YOU WANT TO EDIT? [Type neighborhood name]: ");
+        return scanner.nextLine().toLowerCase();
+    }
+
+    public int editNeighborhoodInformations(Neighborhood n) {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ EDIT A CITY NEIGHBORHOOD                         +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ [!] INFORMATIONS ABOUT THE NEIGHBORHOOD:         +");
+        System.out.println("[1] NEIGHBORHOOD NAME: "+n.getName());
+        System.out.println("[3] DEMOGRAPHIC RATE: "+n.getDemographicRate());
+        System.out.println("[4] PER CAPTA INCOME RATE: "+n.getPerCaptaIncome());
+        System.out.println("[5] CRIME RATE: "+n.getCrimeRate());
+        System.out.println("[#] WHICH INFORMATION ABOUT THE "+n.getName()+" CITY?");
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        }catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public String searchCityInformations() {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ SEARCH A CITY ON DATABASE                        +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.print("[#] WHICH IS THE CITY NAME: ");
+        try {
+            return scanner.nextLine().toLowerCase().trim();
+        }catch(NumberFormatException fe) {
+            fe.printStackTrace();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return "[!] CITY NOT FOUND!";
+    }
+
+    public String searchNeighborhoodInformations() {
+        clear();
+        System.out.println("+--------------------------------------------------+");
+        System.out.println("+ SEARCH A NEIGHBORHOOD                            +");
+        System.out.println("+--------------------------------------------------+");
+        System.out.print("[#] WHICH NEIGHBORHOOD DO YOU WANT TO SEARCH? [Type neighborhood name]: ");
+        try {
+            return scanner.nextLine().toLowerCase();
+        }catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "[!] NEIGHBORHOOD NOT FOUND!";
     }
 }

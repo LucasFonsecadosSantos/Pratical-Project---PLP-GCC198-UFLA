@@ -17,6 +17,7 @@ import java.io.Serializable;
  * City and Neighborhood.
  */
 public abstract class Record implements Serializable{
+    private static final long serialVersionUID = -842012067799192648L;
 
     /**
      * String name attribute;

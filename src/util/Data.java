@@ -34,6 +34,7 @@ import java.io.Serializable;
  * The serializable interface was implemented here.
  */
 public class Data implements Serializable {
+    private static final long serialVersionUID = -842012067799192648L;
     
     /**
      * Successfully message string attribute.
@@ -106,13 +107,14 @@ public class Data implements Serializable {
     public String storeCityData(City city) {
         try {
             File file = new File("./data/cities/"+city.getName()+".bin");
-            if(!new File("./data/cities").exists()) {
-                new File("./data/cities").mkdirs();
-            }
-            if(!file.exists()) {
-                file.createNewFile();
-            }   
-            ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + city.getName() + ".bin", true));
+            //if(!new File("./data/cities").exists()) {
+             //   new File("./data/cities").mkdirs();
+            //}
+            //if(!file.exists()) {
+              //  file.createNewFile();
+
+            //}
+            ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + city.getName() + ".bin"));
             object.writeObject(city);
         }catch(Exception e) {
             e.printStackTrace();

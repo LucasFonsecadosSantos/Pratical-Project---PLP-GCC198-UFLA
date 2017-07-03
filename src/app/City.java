@@ -20,7 +20,8 @@ import java.io.Serializable;
  * list attribute.
  */
 public class City extends Record {
-    
+
+    private static final long serialVersionUID = -842012067799192648L;
     /**
      * District name string attribute state.
      */
@@ -143,7 +144,7 @@ public class City extends Record {
      * 
      * @return String String menssage operation successful.
      */
-    private String updateRates() {
+    public String updateRates() {
         String operation = "";
         resetAllCityRates();
         for(Neighborhood n : neighborhoodSet) {
