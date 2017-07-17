@@ -68,24 +68,31 @@ public class SystemManager {
             switch(option) {
                 case "1":
                     createNewCity();
+                    logger.generateActionLog("The user chosen create a new city operation.");
                     break;
                 case "3":
                     loadAllCities();
+                    logger.generateActionLog("The user chosen load all cities stored.");
                     break;
                 case "5":
                     cityManager(gui.captureCity());
+                    logger.generateActionLog("The user chosen manager a city operation.");
                     break;
                 case "6":
                     searchCity();
+                    logger.generateActionLog("The user chosen search a city operation.");
                     break;
                 case "7":
                     searchNeighborhood();
+                    logger.generateActionLog("The user chosen search a neighborhood operation.");
                     break;
                 case "9":
                     deleteDataFiles();
+                    logger.generateActionLog("The user chosen delete all data files operation.");
                     break;
                 case "4":
                     editCity();
+                    logger.generateActionLog("The user chosen edit a city data operation.");
                     break;
                 default:
                     break;
@@ -125,12 +132,14 @@ public class SystemManager {
             }else if(count == 3) {
                 currentMayor = s;
                 cities.add(new City(name, district, country, currentMayor));
+                logger.generateActionLog("New city ["+name+"] created with the informations entered by the user.");
                 continue;
             }
         }
         System.out.println(cities);
         gui.pressToContinue();
         System.out.println(data.storeCityData(cities));
+        logger.generateActionLog("The new cities entered by the user has been stored.");
     }
 
     /**
@@ -140,6 +149,7 @@ public class SystemManager {
      */
     public void loadAllCities() {
         List<City> cities = data.loadCities();
+        logger.generateActionLog("All cities loaded of binary database files.");
         System.out.println(cities);
         gui.showCitiesData(cities);
     }
@@ -154,6 +164,7 @@ public class SystemManager {
      */
     public void cityManager(String cityName) {
         List<City> cities = data.loadCities();
+        logger.generateActionLog("All cities loaded of binary database files.");
         City city = null;
         for(City c : cities) {
             if(c.getName().equals(cityName)) {
@@ -225,6 +236,7 @@ public class SystemManager {
             c.addNeighborhood(n);
         }
         data.storeCityData(c);
+        logger.generateActionLog("All cities stored at binary database files.");
     }
 
     /**
@@ -246,6 +258,7 @@ public class SystemManager {
             }
         }
         System.out.println(data.storeCityData(c));
+        logger.generateActionLog("All cities stored at binary database files.");
         gui.pressToContinue();
         return;
         
@@ -288,6 +301,7 @@ public class SystemManager {
                         }while(!control);
                         n.setName(newName);
                         System.out.println(data.storeCityData(c));
+                        logger.generateActionLog("All cities stored at binary database files.");
                         break;
                     case 2:
                         gui.clear();
@@ -300,6 +314,7 @@ public class SystemManager {
                             n.setDemographicRate(Integer.parseInt(scanner.nextLine()));
                             c.updateRates();
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                         }catch (NumberFormatException nfe) {
                             nfe.printStackTrace();
                         }catch (Exception e) {
@@ -317,6 +332,7 @@ public class SystemManager {
                             n.setPerCaptaIncome(Double.parseDouble(scanner.nextLine()));
                             c.updateRates();
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                         }catch (NumberFormatException nfe) {
                             nfe.printStackTrace();
                         }catch (Exception e) {
@@ -334,6 +350,7 @@ public class SystemManager {
                             n.setCrimeRate(Integer.parseInt(scanner.nextLine()));
                             c.updateRates();
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                         }catch (NumberFormatException nfe) {
                             nfe.printStackTrace();
                         }catch (Exception e) {
@@ -376,6 +393,7 @@ public class SystemManager {
      */
     public void editCity() {
         List<City> cities = data.loadCities();
+        logger.generateActionLog("All cities loaded of binary database files.");
         boolean control_1 = true;
         String nameCity;
         do {
@@ -420,6 +438,7 @@ public class SystemManager {
                             System.out.print("[#] ENTER A NEW STATE NAME: ");
                             c.setDistrict(scanner.nextLine().toLowerCase());
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
                             break;
@@ -432,6 +451,7 @@ public class SystemManager {
                             System.out.print("[#] ENTER A NEW COUNTRY NAME: ");
                             c.setCountry(scanner.nextLine().toLowerCase());
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
                             break;
@@ -444,6 +464,7 @@ public class SystemManager {
                             System.out.print("[#] ENTER A NEW MAYOR NAME: ");
                             c.setMayor(scanner.nextLine().toLowerCase());
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
                             break;
@@ -457,6 +478,7 @@ public class SystemManager {
                             System.out.print("[#] ENTER A NEW DEMOGRAPHIC RATE: ");
                             c.setDemographicRate(Integer.parseInt(scanner.nextLine()));
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
                             break;
@@ -469,6 +491,7 @@ public class SystemManager {
                             System.out.print("[#] ENTER A NEW PER CAPTA INCOME RATE: ");
                             c.setPerCaptaIncome(Double.parseDouble(scanner.nextLine()));
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
                             break;
@@ -481,6 +504,7 @@ public class SystemManager {
                             System.out.print("[#] ENTER A NEW CRIME RATE: ");
                             c.setCrimeRate(Integer.parseInt(scanner.nextLine()));
                             System.out.println(data.storeCityData(c));
+                            logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
                             break;
@@ -507,6 +531,7 @@ public class SystemManager {
 
     public void searchCity() {
         List<City> cities = data.loadCities();
+        logger.generateActionLog("All cities loaded of binary database files.");
         String key = gui.searchCityInformations();
         for(City c : cities) {
             if(key.equals(c.getName())) {
@@ -523,6 +548,7 @@ public class SystemManager {
     public void searchNeighborhood() {
         String key = gui.searchNeighborhoodInformations();
         List<City> cities = data.loadCities();
+        logger.generateActionLog("All cities loaded of binary database files.");
         List<Neighborhood> neighborhoods;
         for(City c : cities) {
             neighborhoods = c.getNeighborhoods();

@@ -21,6 +21,9 @@ import java.io.Serializable;
  */
 public class City extends Record {
 
+    /**
+     * Serial version constant value attribute;
+     */
     private static final long serialVersionUID = -842012067799192648L;
     /**
      * District name string attribute state.
@@ -64,7 +67,7 @@ public class City extends Record {
             setCountry(country);
             setMayor(mayor);
             neighborhoodSet = new ArrayList<Neighborhood>();
-    }
+        }
 
     /**
      * District name string attribute state modifier method.
