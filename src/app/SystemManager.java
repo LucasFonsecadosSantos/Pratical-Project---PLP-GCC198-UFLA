@@ -108,34 +108,13 @@ public class SystemManager {
      * binary files database.
      */
     public void createNewCity() {
-        List<String> contents = gui.createCityInformations();
-        List<City> cities = new ArrayList<City>();
-        int count = -1;
+        List<City> cities = gui.createCityInformations();
 
         String name = "";
         String district = "";
         String country = "";
         String currentMayor = "";
 
-        System.out.println(contents);
-        gui.pressToContinue();
-        for(String s : contents) {
-            count++;
-            if(count == 4) {
-                count = 0;
-            }else if(count == 0) {
-                name = s;
-            }else if(count == 1) {
-                district = s;
-            }else if(count == 2) {
-                country = s; 
-            }else if(count == 3) {
-                currentMayor = s;
-                cities.add(new City(name, district, country, currentMayor));
-                logger.generateActionLog("New city ["+name+"] created with the informations entered by the user.");
-                continue;
-            }
-        }
         System.out.println(cities);
         gui.pressToContinue();
         System.out.println(data.storeCityData(cities));

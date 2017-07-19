@@ -86,17 +86,17 @@ public class Data implements Serializable {
         Gui.pressToContinue();
         for(City c : citiesList) {
             try {
-                File file = new File("./data/cities/"+c.getName()+".bin");
-                if(!new File("./data/cities").exists()) {
-                    new File("./data/cities").mkdirs();
-                }
-                if(!file.exists()) {
-                    file.createNewFile();
-                }   
-                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + c.getName() + ".bin", true));
-                System.out.println(c);
-                Gui.pressToContinue();
+                // File file = new File("./data/cities/"+c.getName()+".bin");
+                // if(!new File("./data/cities").exists()) {
+                    // new File("./data/cities").mkdirs();
+                // }
+                //if(!file.exists()) {
+                    //ile.createNewFile();
+                //}   
+                ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + c.getName() + ".bin"));
+                System.out.println(c + " object");
                 object.writeObject(c);
+                System.out.println(c + " object");
                 object.close();
             }catch(Exception e) {
                 e.printStackTrace();
@@ -118,12 +118,14 @@ public class Data implements Serializable {
             //if(!new File("./data/cities").exists()) {
              //   new File("./data/cities").mkdirs();
             //}
-            //if(!file.exists()) {
-              //  file.createNewFile();
+            if(!file.exists()) {
+                file.createNewFile();
 
-            //}
+            }
             ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + city.getName() + ".bin"));
+            System.out.println(city + " pressssss");
             object.writeObject(city);
+            object.close();
         }catch(Exception e) {
             e.printStackTrace();
         }

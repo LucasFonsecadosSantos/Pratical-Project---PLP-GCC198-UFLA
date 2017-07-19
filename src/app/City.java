@@ -150,6 +150,9 @@ public class City extends Record {
     public String updateRates() {
         String operation = "";
         resetAllCityRates();
+        int demographic=0;
+        double perCapta=0;
+        int crime=0;
         for(Neighborhood n : neighborhoodSet) {
             operation += "+--------------------------------------------------+\n";
             operation += "["+n.getName()+"]:\n";
@@ -157,10 +160,13 @@ public class City extends Record {
             operation += n.getPerCaptaIncome() + " per capta income rate. \n";
             operation += n.getCrimeRate() + " crime cases. \n";
             operation += "+--------------------------------------------------+\n";
-            setDemographicRate(getDemographicRate() + n.getDemographicRate());
-            setPerCaptaIncome(getPerCaptaIncome() + n.getPerCaptaIncome());
-            setCrimeRate(getCrimeRate() + n.getCrimeRate());
+            demographic += n.getDemographicRate();
+            perCapta += n.getPerCaptaIncome();
+            crime += n.getCrimeRate();
         }
+        setDemographicRate(demographic / neighborhoodSet.size());
+        setPerCaptaIncome(perCapta / neighborhoodSet.size());
+        setCrimeRate(crime / neighborhoodSet.size());
         return operation;
     }
 

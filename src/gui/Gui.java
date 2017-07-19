@@ -218,9 +218,10 @@ public class Gui {
      * 
      * @return List New citys registered.
      */
-    public List<String> createCityInformations() {
-        List<String> informations = new ArrayList<String>();
+    public List<City> createCityInformations() {
+        List<City> newCities = new ArrayList<City>();
         String option = "y";
+        String[] informations = new String[4];
         do {
             clear();
             System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
@@ -228,18 +229,19 @@ public class Gui {
             System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
             System.out.println(ANSI_YELLOW+"[!] The neighborhoods will be add after this process;"+ANSI_RESET);
             System.out.print(ANSI_WHITE+"[#] CITY NAME: "+ANSI_RESET);
-            informations.add(scanner.nextLine());
+            informations[0] = scanner.nextLine();
             System.out.print(ANSI_WHITE+"[#] STATE/PROVINCE/DISTRICT: "+ANSI_RESET);
-            informations.add(scanner.nextLine());
+            informations[1] = scanner.nextLine();
             System.out.print(ANSI_WHITE+"[#] COUNTRY: "+ANSI_RESET);
-            informations.add(scanner.nextLine());
+            informations[2] = scanner.nextLine();
             System.out.print(ANSI_WHITE+"[#] CURRENT MAYOR: "+ANSI_RESET);
-            informations.add(scanner.nextLine());
+            informations[3] = scanner.nextLine();
+            newCities.add(new City(informations[0], informations[1], informations[2], informations[3]));
             System.out.print(ANSI_WHITE+"[#] DO YOU WANT TO REGISTER A NEW CITY? [Y/n]?"+ANSI_RESET);
             option = scanner.nextLine().toLowerCase();
         }while(option.equals("y"));
         pressToContinue();
-        return informations;
+        return newCities;
     }
 
     public void showCitiesData(List<City> cities) {
