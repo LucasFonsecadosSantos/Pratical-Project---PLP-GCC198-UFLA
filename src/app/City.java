@@ -108,9 +108,15 @@ public class City extends Record {
         this.mayor = mayor.toLowerCase();
     }
 
+    /**
+     * District string name attribute state accessor method.
+     * 
+     * @return String district name.
+     */
     public String getDistrict() {
         return this.district;
     }
+
     /**
      * This method is responsible for add new neighborhoods
      * into neighborhood list. This list is a attribute.
@@ -122,6 +128,11 @@ public class City extends Record {
         updateRates();
     }
 
+    /**
+     * Neighborhoods list attribute accessor method.
+     * 
+     * @return List<Neighborhood> A java lista data structure with all city neighboorhods.
+     */
     public List<Neighborhood> getNeighborhoods() {
         if(neighborhoodSet.size() == 0) {
             return null;

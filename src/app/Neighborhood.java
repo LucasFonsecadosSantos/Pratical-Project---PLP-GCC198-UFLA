@@ -39,6 +39,8 @@ public class Neighborhood extends Record {
     /**
      * This method is an override.
      * He returns all informations about the neighborhood.
+     * It is an overload java object class method, used by shows
+     * to the user, informations about this object attributes states.
      * 
      * @return String Neighborhood object ttribute states.  
      */

@@ -109,16 +109,19 @@ public class SystemManager {
      */
     public void createNewCity() {
         List<City> cities = gui.createCityInformations();
-
         String name = "";
         String district = "";
         String country = "";
         String currentMayor = "";
-
         System.out.println(cities);
         gui.pressToContinue();
         System.out.println(data.storeCityData(cities));
         logger.generateActionLog("The new cities entered by the user has been stored.");
+        int count = 0;
+        for(City city : cities) {
+            count++;
+            logger.generateMessageLog(count+". City: " + city.hashCode());
+        }
     }
 
     /**
@@ -151,9 +154,7 @@ public class SystemManager {
                 break;
             }
         }
-
         String option = "0";
-
         while(!option.equals("-99")) {
             option = gui.callCityManager(city);
             switch(option) {
@@ -508,6 +509,12 @@ public class SystemManager {
         }while(control_1);
     }
 
+    /**
+     * This method function is capture by the user, informations to search a city
+     * registered into the database binary files. If the search returns a valid 
+     * element found, it shows to him the object attribute states, in this case,
+     * informations about the city.
+     */
     public void searchCity() {
         List<City> cities = data.loadCities();
         logger.generateActionLog("All cities loaded of binary database files.");

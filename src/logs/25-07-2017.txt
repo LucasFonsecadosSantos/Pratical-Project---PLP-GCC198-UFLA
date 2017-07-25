@@ -1,0 +1,15 @@
+
++==========================================+
++           CITY MANAGER LOG FILE          +
++==========================================+
++ Developed by Lucas Fonseca dos Santos.   +
++ Version: 1.0 2017                        +
++==========================================+
+[25-07-2017]: LOG FILE CREATED! Welcome to my software!
+[25-07-2017/ACTION]: SYSTEM STARTED! ;
+[25-07-2017/ACTION]: SYSTEM STARTED! ;
+[25-07-2017/ACTION]: All cities loaded of binary database files. ;
+[25-07-2017/ACTION]: The user chosen load all cities stored. ;
+[25-07-2017/ACTION]: All cities loaded of binary database files. ;
+[25-07-2017/ACTION]: All cities stored at binary database files. ;
+[25-07-2017/ACTION]: The user chosen manager a city operation. ;

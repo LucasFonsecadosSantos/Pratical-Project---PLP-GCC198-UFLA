@@ -80,7 +80,7 @@ public class Logger {
         SystemDate sd = new SystemDate();
         try {
             bw = new BufferedWriter(new FileWriter("./logs/"+sd.returnOnlyDate()+".txt", true));
-            bw.write("["+sd.returnCompleteDate()+"/RECORD]: "+action+" ;\n");
+            bw.write("[RECORD > OBJECT HASH CODE]: "+action+" ;\n");
             bw.close();
         }catch(Exception e) {
             e.printStackTrace();

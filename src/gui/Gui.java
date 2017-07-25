@@ -182,6 +182,13 @@ public class Gui {
         }
     }
 
+    /**
+     * This method shows to the user, informations for the navigation at the city
+     * manager module system and after this, captures the user operation choosen.
+     * 
+     * @return String The option choosen by the user.
+     * @param city A city object to edit.
+     */
     public String callCityManager(City city) {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -244,6 +251,13 @@ public class Gui {
         return newCities;
     }
 
+    /**
+     * This method receives a java list data structure city objects and
+     * runs her, printing out the whole informations about the cities content
+     * of this list.
+     * 
+     * @param cities A java city data strucuture list object.
+     */
     public void showCitiesData(List<City> cities) {
         clear();
         List<Neighborhood> neighborhoodList;
@@ -266,6 +280,12 @@ public class Gui {
         pressToContinue();
     }
 
+    /**
+     * This method show all informations or attributes states of a city object,
+     * received by the parameter.
+     * 
+     * @param c A city object.
+     */
     public void showCitiesData(City c) {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -287,6 +307,13 @@ public class Gui {
         }
         pressToContinue();
     }
+
+    /**
+     * This method is responsible for the data capture about the
+     * city manager module operations.
+     * 
+     * @return String A string data city name.
+     */
     public String captureCity() {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -296,6 +323,13 @@ public class Gui {
         return scanner.nextLine();
     }
 
+    /**
+     * This method is responsible for the add neighborhood operation
+     * for a city object. It shows and captures all neighborhoods attribute
+     * states.
+     * 
+     * @return List<String> A java string list data structure.
+     */
     public List<String> addNewNeighborhoodInformations() {
         String option = "y";
         List<String> informations = new ArrayList<String>();
@@ -428,7 +462,7 @@ public class Gui {
         }
         return 0;
     }
-
+    
     public String searchCityInformations() {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -445,6 +479,12 @@ public class Gui {
         return "[!] CITY NOT FOUND!";
     }
 
+    /**
+     * This method is responsible for the captures all informations to search
+     * a specific neighborhood at the system.
+     * 
+     * @return String A string neighborhood name.
+     */
     public String searchNeighborhoodInformations() {
         clear();
         System.out.println("+--------------------------------------------------+");
