@@ -299,18 +299,23 @@ public class Gui {
         List<Neighborhood> neighborhoodList;
         header("registered cities informations", null);
         for(City c : cities) {
-            System.out.println("\n+ CITY NAME: " +c.getName());
-            System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
-            System.out.println("+ COUNTRY: " +c.getCountry());
-            System.out.println("+ CURRENT MAYOR: " +c.getMayor());
-            System.out.println("+ NEIGHBORHOODS: ");
+            System.out.println("\n"+formattedInformation("CITY NAME: " + c.getName()));
+            System.out.println(formattedInformation("STATE/DISTRICT: " + c.getDistrict()));
+            System.out.println(formattedInformation("COUNTRY: " + c.getCountry()));
+            System.out.println(formattedInformation("CURRENT MAYOR: " + c.getMayor()));
+            if(c.getDemographicRate() != 0) {
+                System.out.println(formattedInformation("DEMOGRAPHIC RATE: " + c.getDemographicRate()));
+                System.out.println(formattedInformation("PER CAPTA INCOME RATE: " + c.getPerCaptaIncome()));
+                System.out.println(formattedInformation("CRIMINAL INDEX RATE: " + c.getCrimeRate()));
+            }
+            System.out.println(formattedInformation(formattedInformation("NEIGHBORHOODS: ")));
             neighborhoodList = c.getNeighborhoods();
             if(neighborhoodList != null) {
                 for(Neighborhood n : neighborhoodList) {
                     System.out.println(n.toString());
                 }
             }
-            System.out.println();
+            System.out.println(ANSI_WHITE+"\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n"+ANSI_RESET);
         }
         pressToContinue();
     }
@@ -323,21 +328,22 @@ public class Gui {
      */
     public void showCitiesData(City c) {
         header("registered city informations", null);
-        System.out.println("\n+ CITY NAME: " +c.getName());
-        System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
-        System.out.println("+ COUNTRY: " +c.getCountry());
-        System.out.println("+ CURRENT MAYOR: " +c.getMayor());
-        System.out.println("+ DEMOGRAPHIC RATE: " + c.getDemographicRate());
-        System.out.println("+ PER CAPTA INCOME RATE: " + c.getPerCaptaIncome());
-        System.out.println("+ CRIME RATE: " + c.getCrimeRate());
-        System.out.println("+ NEIGHBORHOODS: ");
+        System.out.println("\n"+formattedInformation("CITY NAME: " + c.getName()));
+        System.out.println(formattedInformation("STATE/DISTRICT: " + c.getDistrict()));
+        System.out.println(formattedInformation("COUNTRY: " + c.getCountry()));
+        System.out.println(formattedInformation("CURRENT MAYOR: " + c.getMayor()));
+        if(c.getDemographicRate() != 0) {
+            System.out.println(formattedInformation("DEMOGRAPHIC RATE: " + c.getDemographicRate()));
+            System.out.println(formattedInformation("PER CAPTA INCOME RATE: " + c.getPerCaptaIncome()));
+            System.out.println(formattedInformation("CRIMINAL INDEX RATE: " + c.getCrimeRate()));
+        }
+        System.out.println(formattedInformation("NEIGHBORHOODS: "));
         List<Neighborhood> neighborhoodList = c.getNeighborhoods();
         if(neighborhoodList != null) {
             for(Neighborhood n : neighborhoodList) {
                 System.out.println(n.toString());
             }
         }
-        System.out.println(ANSI_WHITE+"\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n"+ANSI_RESET);
         pressToContinue();
     }
 
@@ -348,7 +354,8 @@ public class Gui {
      * @return String A string data city name.
      */
     public String captureCity() {
-        header("welcome to the city manager", formattedAsk("[#] what is the city name: "));
+        header("welcome to the city manager", null);
+        System.out.println(formattedAsk("[#] what is the city name: "));
         return scanner.nextLine();
     }
 
@@ -518,7 +525,8 @@ public class Gui {
      * @return String City name that user wants to be search at the binary database files system.
      */
     public String searchCityInformations() {
-        header("search a city at database", formattedAsk("which is the city name: "));
+        header("search a city at database", null);
+        System.out.println(formattedAsk("which is the city name: "));
         try {
             return scanner.nextLine().toLowerCase().trim();
         }catch(NumberFormatException fe) {
@@ -536,7 +544,8 @@ public class Gui {
      * @return String A string neighborhood name.
      */
     public String searchNeighborhoodInformations() {
-        header("search a neighborhood", formattedAsk("WHICH NEIGHBORHOOD DO YOU WANT TO SEARCH? [Type neighborhood name]: "));
+        header("search a neighborhood", null);
+        System.out.println(formattedAsk("WHICH NEIGHBORHOOD DO YOU WANT TO SEARCH? [Type neighborhood name]: "));
         try {
             return scanner.nextLine().toLowerCase();
         }catch (NumberFormatException nfe) {
@@ -547,6 +556,12 @@ public class Gui {
         return ANSI_RED + "[!] NEIGHBORHOOD NOT FOUND!" + ANSI_RESET;
     }
 
+    /**
+     * This method provides a header string informations to all operations modules system
+     * 
+     * @param headerMsg A header name information.
+     * @param subHeaderMsg A sub title name information.
+     */
     public void header(String headerMsg, String subHeaderMsg) {
         clear();
         System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
@@ -559,6 +574,13 @@ public class Gui {
         }
     }
 
+    /**
+     * This method only formatter a question string.
+     * It facilites the software modularization.
+     * 
+     * @param message String with a message.
+     * @return String String formatted.
+     */
     public String formattedAsk(String message) {
         if(message.contains("[#]") || message.contains("[!]") || message.contains("\n")) {
             message = message.replace("[#]", "");
@@ -568,6 +590,13 @@ public class Gui {
         return ANSI_YELLOW + "[#] "+message.toUpperCase() + ANSI_RESET;
     }
 
+    /**
+     * This method only formatter a information string.
+     * It facilites the software modularization.
+     * 
+     * @param message String with a message.
+     * @return String String formatted.
+     */
     public String formattedInformation(String message) {
         if(message.contains("[#]") || message.contains("[!]") || message.contains("\n")) {
             message = message.replace("[#]", "");
@@ -575,5 +604,24 @@ public class Gui {
             message = message.replace("\n", "");
         }
         return ANSI_BLUE + "[!] "+message.toUpperCase()+"\n" + ANSI_RESET;
+    }
+
+    /**
+     * This method shows remove city operation informations.
+     * 
+     * @param names Java string list with cities names.
+     * @return List Java string list data strucure with names.
+     */
+    public List<String> removeCityInformations(List<String> names) {
+        header("remove a city", formattedInformation("Cities name: "));
+        System.out.println("\n");
+        for(String s : names) {
+            System.out.println(formattedInformation(s.replace(".bin", "")));
+        }
+        List<String> aux = new ArrayList<String>();
+        System.out.println(this.divider);
+        System.out.println(formattedAsk("Type the city name: "));
+        aux.add(scanner.nextLine());
+        return aux;
     }
 }

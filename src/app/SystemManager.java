@@ -70,6 +70,10 @@ public class SystemManager {
                     createNewCity();
                     logger.generateActionLog("The user chosen create a new city operation.");
                     break;
+                case "2":
+                    removeCity();
+                    logger.generateActionLog("The user chosen remove a data city.");
+                    break;
                 case "3":
                     loadAllCities();
                     logger.generateActionLog("The user chosen load all cities stored.");
@@ -101,6 +105,32 @@ public class SystemManager {
         
     }
 
+    public void removeCity() {
+        List<String> dataCitiesName = data.loadDisponibleCities();
+        List<String> names = gui.removeCityInformations(dataCitiesName);
+        List<City> cities = data.loadCities();
+        int index = 0;
+        boolean control = true;
+        for(String s : names) {
+            for(City c : cities) {
+                index++;
+                if(s.equals(c.getName())) {
+                    control = false;
+                    break;
+                }
+            }
+        }
+        if(control) {
+            System.out.println(Gui.getRed() + "[X] CITY NOT FOUND!" + Gui.getReset());
+            logger.generateActionLog("City or cities not found!");
+        }else {
+            cities.remove(index);
+            System.out.println(Gui.getGreen() + "[#] CITY REMOVED!" + Gui.getReset());
+            System.out.println(Gui.getGreen() + data.storeCityData(cities) + Gui.getReset());
+            logger.generateActionLog("City or cities removed with success!");
+        }
+    }
+
     /**
      * This method is responsible to store a new city in
      * database files. He captures all object information states
@@ -109,7 +139,7 @@ public class SystemManager {
      */
     public void createNewCity() {
         List<City> cities = gui.createCityInformations();
-        System.out.println(data.storeCityData(cities));
+        System.out.println(Gui.getGreen() + data.storeCityData(cities) + Gui.getReset());
         logger.generateActionLog("The new cities entered by the user has been stored.");
         int count = 0;
         for(City city : cities) {
@@ -246,22 +276,19 @@ public class SystemManager {
      * @param c City object.
      */
     public void editNeighborhood(City c) {
-        String name = gui.editNeighborhoodInformations(c.getNeighborhoods());
+        String name = this.gui.editNeighborhoodInformations(c.getNeighborhoods());
         List<Neighborhood> neighborhoods = c.getNeighborhoods();
         for(Neighborhood n : neighborhoods) {
             if(n.getName().equals(name)) {
-                switch(gui.editNeighborhoodInformations(n)) {
+                switch(this.gui.editNeighborhoodInformations(n)) {
                     case 1:
-                        gui.clear();
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("+ NEIGHBORHOOD NAME                                +");
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("[!] CURRENT NEIGHBORHOOD NAME: "+n.getName());
+                        this.gui.header("neighborhood name", gui.formattedInformation("current neighborhood name: "+ n.getName()));
+                        System.out.println(Gui.divider());
                         boolean control = true;
                         List<Neighborhood> names = c.getNeighborhoods();
                         String newName;
                         do {
-                            System.out.print("[#] ENTER A NEW NEIGHBORHOOD NAME: ");
+                            System.out.print(this.gui.formattedAsk("[#] ENTER A NEW NEIGHBORHOOD NAME: "));
                             newName = scanner.nextLine().toLowerCase();
                             control = true;
                             for(Neighborhood n2 : names) {
@@ -274,20 +301,17 @@ public class SystemManager {
                             }
                         }while(!control);
                         n.setName(newName);
-                        System.out.println(data.storeCityData(c));
+                        System.out.println(Gui.getRed()+data.storeCityData(c)+Gui.getReset());
                         logger.generateActionLog("All cities stored at binary database files.");
                         break;
                     case 2:
-                        gui.clear();
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("+ DEMOGRAPHIC RATE VALUE                           +");
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("[!] CURRENT DEMOGRAPHIC RATE: "+n.getDemographicRate());
-                        System.out.print("[#] ENTER A NEW DEMOGRAPHIC RATE VALUE [Enter a integer value]: ");
+                        gui.header("demographic rate value", gui.formattedInformation("current demographic rate: " + n.getDemographicRate()));
+                        System.out.println(Gui.divider());
+                        System.out.print(gui.formattedAsk("[#] ENTER A NEW DEMOGRAPHIC RATE VALUE [Enter a integer value]: "));
                         try {
                             n.setDemographicRate(Integer.parseInt(scanner.nextLine()));
                             c.updateRates();
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                         }catch (NumberFormatException nfe) {
                             nfe.printStackTrace();
@@ -296,12 +320,9 @@ public class SystemManager {
                         }
                         break;
                     case 3:
-                        gui.clear();
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("+ PER CAPTA INCOME RATE VALUE                      +");
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("[!] CURRENT PER CAPTA INCOME RATE: "+n.getPerCaptaIncome());
-                        System.out.print("[#] ENTER A NEW DEMOGRAPHIC RATE VALUE [Enter a integer or double value]: ");
+                        gui.header("per capta income rate value", gui.formattedInformation("current per capta income rate: " + n.getPerCaptaIncome()));
+                        System.out.println(Gui.divider());
+                        System.out.print(gui.formattedAsk("[#] ENTER A NEW DEMOGRAPHIC RATE VALUE [Enter a integer or double value]: "));
                         try {
                             n.setPerCaptaIncome(Double.parseDouble(scanner.nextLine()));
                             c.updateRates();
@@ -314,16 +335,13 @@ public class SystemManager {
                         }
                         break;
                     case 4:
-                        gui.clear();
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("+ CRIME RATE VALUE                                 +");
-                        System.out.println("+--------------------------------------------------+");
-                        System.out.println("[!] CURRENT CRIME RATE VALUE: "+n.getCrimeRate());
-                        System.out.print("[#] ENTER A NEW CRIME RATE VALUE [Enter a integer value]: ");
+                        gui.header("crime rate value", gui.formattedInformation("current crime rate value: " + n.getCrimeRate()));
+                        System.out.println(Gui.divider());
+                        System.out.print(gui.formattedAsk("[#] ENTER A NEW CRIME RATE VALUE [Enter a integer value]: "));
                         try {
                             n.setCrimeRate(Integer.parseInt(scanner.nextLine()));
                             c.updateRates();
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                         }catch (NumberFormatException nfe) {
                             nfe.printStackTrace();
@@ -408,7 +426,7 @@ public class SystemManager {
                             System.out.println(gui.divider());
                             System.out.print(gui.formattedAsk("[#] ENTER A NEW STATE NAME: "));
                             c.setDistrict(scanner.nextLine().toLowerCase());
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
@@ -418,7 +436,7 @@ public class SystemManager {
                             System.out.println(gui.divider());
                             System.out.print(gui.formattedAsk("[#] ENTER A NEW COUNTRY NAME: "));
                             c.setCountry(scanner.nextLine().toLowerCase());
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
@@ -428,7 +446,7 @@ public class SystemManager {
                             System.out.println(gui.divider());
                             System.out.print(gui.formattedAsk("[#] ENTER A NEW MAYOR NAME: "));
                             c.setMayor(scanner.nextLine().toLowerCase());
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
@@ -438,7 +456,7 @@ public class SystemManager {
                             System.out.println(gui.divider());
                             System.out.print(gui.formattedAsk("[#] ENTER A NEW DEMOGRAPHIC RATE: "));
                             c.setDemographicRate(Integer.parseInt(scanner.nextLine()));
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
@@ -448,7 +466,7 @@ public class SystemManager {
                             System.out.println(gui.divider());
                             System.out.print(gui.formattedAsk("[#] ENTER A NEW PER CAPTA INCOME RATE: "));
                             c.setPerCaptaIncome(Double.parseDouble(scanner.nextLine()));
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
@@ -457,7 +475,7 @@ public class SystemManager {
                             gui.header("city crime rate", gui.formattedInformation("current crime rate: "+c.getCrimeRate()));
                             System.out.print(gui.formattedAsk("[#] ENTER A NEW CRIME RATE: "));
                             c.setCrimeRate(Integer.parseInt(scanner.nextLine()));
-                            System.out.println(data.storeCityData(c));
+                            System.out.println(Gui.getGreen() + data.storeCityData(c) + Gui.getReset());
                             logger.generateActionLog("All cities stored at binary database files.");
                             gui.pressToContinue();
                             control_1 = false;
@@ -468,7 +486,7 @@ public class SystemManager {
                             for(Neighborhood n : neighborhoods) {
                                 System.out.println(n.toString());
                             }
-                            System.out.println(gui.divider());
+                            System.out.println(Gui.divider());
                             System.out.print(gui.formattedAsk("[#] DO YOU WANT TO REMOVE ANY NEIGHBORHOOD? [Y/n]: "));
                             System.out.println("WILL BE DEVELOPED!");
                             gui.pressToContinue();
