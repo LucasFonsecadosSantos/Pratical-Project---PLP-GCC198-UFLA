@@ -207,7 +207,7 @@ public class Gui {
         System.out.println(ANSI_WHITE+"+ [8] "+ANSI_GREEN+"Generate statistics;"+ANSI_WHITE+"                         +"+ANSI_RESET);
         System.out.println(ANSI_WHITE+"+ [9] "+ANSI_GREEN+"Delete Data Files;"+ANSI_WHITE+"                           +"+ANSI_RESET);
         System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
-        System.out.println(ANSI_WHITE+"+ [-99] "+ANSI_RED+"EXIT"+ANSI_WHITE+"                                       +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ ["+ANSI_RED+"-99"+ANSI_WHITE+"] "+ANSI_RED+"EXIT"+ANSI_WHITE+"                                       +"+ANSI_RESET);
         System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
         System.out.println(ANSI_WHITE+"+==================================================+"+ANSI_RESET);
         System.out.print(formattedAsk("[#] ENTER YOUR OPTION: "));
