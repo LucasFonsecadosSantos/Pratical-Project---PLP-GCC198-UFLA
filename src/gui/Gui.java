@@ -114,6 +114,11 @@ public class Gui {
     private static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
     /**
+     * Console divider string line attribute;
+     */
+    private static final String divider = ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET;
+
+    /**
      * GUI object constructor. He instaces java scanner object
      * to capture the user inputs.
      */
@@ -134,7 +139,7 @@ public class Gui {
      * press any key to continue;
      */
     public static void pressToContinue() {
-        System.out.println("[#] Press any key to continue...");
+        System.out.println(ANSI_YELLOW+"[#] Press any key to continue..."+ANSI_RESET);
         try { 
             System.in.read();
         }catch(IOException ex) {
@@ -143,6 +148,41 @@ public class Gui {
     }
 
     /**
+     * ANSI_RESET attribute accessor method.
+     * 
+     * @return String A string constant
+     */
+    public static String divider() {
+        return divider;
+    }
+
+    /**
+     * ANSI_GREEN attribute accessor method.
+     * 
+     * @return String A string constant
+     */
+    public static String getGreen() {
+        return ANSI_GREEN;
+    }
+
+    /**
+     * ANSI_GREEN attribute accessor method.
+     * 
+     * @return String A string constant
+     */
+    public static String getRed() {
+        return ANSI_RED;
+    }
+
+    /**
+     * ANSI_RESET attribute accessor method.
+     * 
+     * @return String A string constant
+     */
+    public static String getReset() {
+        return ANSI_RESET;
+    }
+    /**
      * This method shows and captures all informations to execute
      * the system. He is called when the system is started.
      * 
@@ -150,35 +190,35 @@ public class Gui {
      */
     public String callMenu(){
         clear();
-        System.out.println("+==================================================+");
-        System.out.println("+                                                  +");
-        System.out.println("+           CITY MANAGER SYSTEM v1.0               +");
-        System.out.println("+                                                  +");
-        System.out.println("+==================================================+");
-        System.out.println("+                                                  +");
-        System.out.println("+ What do you want here?                           +");
-        System.out.println("+ [1] Add a new city;                              +");
-        System.out.println("+ [2] Remove a city;                               +");
-        System.out.println("+ [3] Load all registereds citys;                  +");
-        System.out.println("+ [4] Edit a city;                                 +");
-        System.out.println("+ [5] Enter a city to manager it;                  +");
-        System.out.println("+ [6] Search a City;                               +");
-        System.out.println("+ [7] Search a Neighborhood;                       +");
-        System.out.println("+ [8] Generate statistics;                         +");
-        System.out.println("+ [9] Delete Data Files;                           +");
-        System.out.println("+                                                  +");
-        System.out.println("+ [-99] EXIT                                       +");
-        System.out.println("+                                                  +");
-        System.out.println("+==================================================+");
+        System.out.println(ANSI_WHITE+"+==================================================+"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+           "+ANSI_CYAN+"CITY MANAGER SYSTEM v1.0"+ANSI_WHITE+"               +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+==================================================+"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ "+ANSI_YELLOW+"What do you want here?"+ANSI_WHITE+"                           +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [1] "+ANSI_GREEN+"Add a new city;"+ANSI_WHITE+"                              +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [2] "+ANSI_GREEN+"Remove a city;"+ANSI_WHITE+"                               +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [3] "+ANSI_GREEN+"Load all registereds citys;"+ANSI_WHITE+"                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [4] "+ANSI_GREEN+"Edit a city;"+ANSI_WHITE+"                                 +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [5] "+ANSI_GREEN+"Enter a city to manager it;"+ANSI_WHITE+"                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [6] "+ANSI_GREEN+"Search a City;"+ANSI_WHITE+"                               +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [7] "+ANSI_GREEN+"Search a Neighborhood;"+ANSI_WHITE+"                       +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [8] "+ANSI_GREEN+"Generate statistics;"+ANSI_WHITE+"                         +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [9] "+ANSI_GREEN+"Delete Data Files;"+ANSI_WHITE+"                           +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+ [-99] "+ANSI_RED+"EXIT"+ANSI_WHITE+"                                       +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+==================================================+"+ANSI_RESET);
         System.out.print(formattedAsk("[#] ENTER YOUR OPTION: "));
         try {
             return scanner.nextLine();
         }catch (NumberFormatException nfe) {
             nfe.printStackTrace();
-            return "-99";
+            return "530";
         }catch (Exception e) {
             e.printStackTrace();
-            return "-99";
+            return "530";
         }
     }
 
@@ -191,20 +231,20 @@ public class Gui {
      */
     public String callCityManager(City city) {
         clear();
-        System.out.println("+--------------------------------------------------+");
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
         System.out.println(city.getName().toUpperCase());
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+                                                  +");
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
         System.out.println("+ What do you want with this city?                 +");
         System.out.println("+ [1] Show city informations;                      +");
         System.out.println("+ [2] Add a new neighborhood;                      +");
         System.out.println("+ [3] Remove a neighborhood;                       +");
         System.out.println("+ [4] Edit a neighborhood;                         +");
         System.out.println("+ [5] Generate statistcs report file               +");
-        System.out.println("+                                                  +");
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
         System.out.println("+ [-99] Back to main menu                          +");
-        System.out.println("+                                                  +");
-        System.out.println("+--------------------------------------------------+");
+        System.out.println(ANSI_WHITE+"+                                                  +"+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
         System.out.print(formattedAsk("[#] ENTER YOUR OPTION: "));
         try {
             return scanner.nextLine();
@@ -333,7 +373,7 @@ public class Gui {
             System.out.print(formattedAsk("[#] CRIME RATE: "));
             informations.add(scanner.nextLine().toLowerCase());
             System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
-            System.out.print(formattedAsk("DO YOU WANT TO REGISTER A NEW NEIGHBORHOOD? [Y/n]?"));
+            System.out.print(formattedAsk("DO YOU WANT TO REGISTER A NEW NEIGHBORHOOD? [Y/n]? "));
             option = scanner.nextLine().toLowerCase();
         } while(option.equals("y"));
         pressToContinue();
@@ -347,7 +387,8 @@ public class Gui {
      * @return String Confirmation user response.
      */
     public String deleteDataFilesInformations() {
-        header("delete all records", formattedInformation("[!] All your saved data in the system will be erased;")+formattedAsk("[#] do you want to continue [Y/n]: "));
+        header("delete all records", formattedInformation("[!] All your saved data in the system will be erased;"));
+        System.out.println(formattedAsk("[#] do you want to continue [Y/n]: "));
         return scanner.nextLine().toLowerCase();
     }
 
@@ -361,10 +402,11 @@ public class Gui {
         String option = "y";
         List<String> names = new ArrayList<String>();
         do {
-            header("remove a neighborhoods", formattedInformation("Your saved data in the system will be erased;")+formattedAsk("[#] WHICH NEIGHBORHOOD DO YOU WANT TO REMOVE? TYPE THE  NEIGHBORHOOD NAME: "));
+            header("remove a neighborhoods", formattedInformation("Your saved data in the system will be erased;"));
+            System.out.println(formattedAsk("[#] WHICH NEIGHBORHOOD DO YOU WANT TO REMOVE? TYPE THE  NEIGHBORHOOD NAME: "));
             names.add(scanner.nextLine());
             System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
-            System.out.println(formattedAsk("[#] DO YOU WANT TO REMOVE MORE NEIGHBORHOODS? [Y/n]: "));
+            System.out.print(formattedAsk("[#] DO YOU WANT TO REMOVE MORE NEIGHBORHOODS? [Y/n]: "));
             option = scanner.nextLine().toLowerCase();
         }while (option.equals("y"));
         return names;
@@ -517,8 +559,8 @@ public class Gui {
         }
     }
 
-    private String formattedAsk(String message) {
-        if(message.contains("[#]") || message.contains("[!]")) {
+    public String formattedAsk(String message) {
+        if(message.contains("[#]") || message.contains("[!]") || message.contains("\n")) {
             message = message.replace("[#]", "");
             message = message.replace("[!]", "");
             message = message.replace("\n", "");
@@ -526,8 +568,8 @@ public class Gui {
         return ANSI_YELLOW + "[#] "+message.toUpperCase() + ANSI_RESET;
     }
 
-    private String formattedInformation(String message) {
-        if(message.contains("[#]") || message.contains("[!]")) {
+    public String formattedInformation(String message) {
+        if(message.contains("[#]") || message.contains("[!]") || message.contains("\n")) {
             message = message.replace("[#]", "");
             message = message.replace("[!]", "");
             message = message.replace("\n", "");

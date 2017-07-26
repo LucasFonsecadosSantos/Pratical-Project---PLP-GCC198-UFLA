@@ -116,6 +116,7 @@ public class SystemManager {
             count++;
             logger.generateMessageLog(count+". City: " + city.hashCode());
         }
+        gui.pressToContinue();
     }
 
     /**
@@ -349,9 +350,9 @@ public class SystemManager {
         String option = gui.deleteDataFilesInformations();
         gui.clear();
         if(option.equals("y")) {
-            System.out.println("[...] DELETING ALL YOUR DATA...");
+            System.out.println(Gui.getRed()+"[...] DELETING ALL YOUR DATA..."+Gui.getReset());
             data.deleteAllFiles();
-            System.out.println("[!] YOUR DATA WAS BEEN DELETED!");
+            System.out.println(Gui.getGreen()+"[!] YOUR DATA WAS BEEN DELETED!"+Gui.getReset());
             gui.pressToContinue();
             return;
         }else {
@@ -403,12 +404,9 @@ public class SystemManager {
                             System.out.println(data.storeCityData(c));
                             break;*/
                         case 2:
-                            gui.clear();
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CITY STATE/DISTRICT/PROVINCE                     +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT INFORMATION: "+c.getDistrict());
-                            System.out.print("[#] ENTER A NEW STATE NAME: ");
+                            gui.header("CITY STATE/DISTRICT/PROVINCE", gui.formattedInformation("[!] CURRENT INFORMATION: " + c.getDistrict()));
+                            System.out.println(gui.divider());
+                            System.out.print(gui.formattedAsk("[#] ENTER A NEW STATE NAME: "));
                             c.setDistrict(scanner.nextLine().toLowerCase());
                             System.out.println(data.storeCityData(c));
                             logger.generateActionLog("All cities stored at binary database files.");
@@ -416,12 +414,9 @@ public class SystemManager {
                             control_1 = false;
                             break;
                         case 3:
-                            gui.clear();
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CITY COUNTRY                                     +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT COUNTRY: "+c.getCountry());
-                            System.out.print("[#] ENTER A NEW COUNTRY NAME: ");
+                            gui.header("country of city", gui.formattedInformation("[!] CURRENT COUNTRY: " + c.getCountry()));
+                            System.out.println(gui.divider());
+                            System.out.print(gui.formattedAsk("[#] ENTER A NEW COUNTRY NAME: "));
                             c.setCountry(scanner.nextLine().toLowerCase());
                             System.out.println(data.storeCityData(c));
                             logger.generateActionLog("All cities stored at binary database files.");
@@ -429,12 +424,9 @@ public class SystemManager {
                             control_1 = false;
                             break;
                         case 4:
-                            gui.clear();
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CURRENT CITY MAYOR                               +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT MAYOR: "+c.getMayor());
-                            System.out.print("[#] ENTER A NEW MAYOR NAME: ");
+                            gui.header("current city mayor", gui.formattedInformation("current mayor: " + c.getMayor()));
+                            System.out.println(gui.divider());
+                            System.out.print(gui.formattedAsk("[#] ENTER A NEW MAYOR NAME: "));
                             c.setMayor(scanner.nextLine().toLowerCase());
                             System.out.println(data.storeCityData(c));
                             logger.generateActionLog("All cities stored at binary database files.");
@@ -442,13 +434,9 @@ public class SystemManager {
                             control_1 = false;
                             break;
                         case 5:
-                            gui.clear();
-                            control_1 = false;
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CITY DEMOGRAPHIC RATE                            +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT CITY DEMOGRAPHIC RATE: "+c.getDemographicRate());
-                            System.out.print("[#] ENTER A NEW DEMOGRAPHIC RATE: ");
+                            gui.header("current city demographic rate", gui.formattedInformation("current city demographic rate: " + c.getDemographicRate()));
+                            System.out.println(gui.divider());
+                            System.out.print(gui.formattedAsk("[#] ENTER A NEW DEMOGRAPHIC RATE: "));
                             c.setDemographicRate(Integer.parseInt(scanner.nextLine()));
                             System.out.println(data.storeCityData(c));
                             logger.generateActionLog("All cities stored at binary database files.");
@@ -456,12 +444,9 @@ public class SystemManager {
                             control_1 = false;
                             break;
                         case 6:
-                            gui.clear();
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CITY PER CAPTA INCOME RATE                       +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT PER CAPTA INCOME RATE: "+c.getPerCaptaIncome());
-                            System.out.print("[#] ENTER A NEW PER CAPTA INCOME RATE: ");
+                            gui.header("city per capta income rate", gui.formattedInformation("current per capta income rate:" + c.getPerCaptaIncome()));
+                            System.out.println(gui.divider());
+                            System.out.print(gui.formattedAsk("[#] ENTER A NEW PER CAPTA INCOME RATE: "));
                             c.setPerCaptaIncome(Double.parseDouble(scanner.nextLine()));
                             System.out.println(data.storeCityData(c));
                             logger.generateActionLog("All cities stored at binary database files.");
@@ -469,12 +454,8 @@ public class SystemManager {
                             control_1 = false;
                             break;
                         case 7:
-                            gui.clear();
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CITY CRIME RATE                                  +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT CRIME RATE: "+c.getCrimeRate());
-                            System.out.print("[#] ENTER A NEW CRIME RATE: ");
+                            gui.header("city crime rate", gui.formattedInformation("current crime rate: "+c.getCrimeRate()));
+                            System.out.print(gui.formattedAsk("[#] ENTER A NEW CRIME RATE: "));
                             c.setCrimeRate(Integer.parseInt(scanner.nextLine()));
                             System.out.println(data.storeCityData(c));
                             logger.generateActionLog("All cities stored at binary database files.");
@@ -482,16 +463,13 @@ public class SystemManager {
                             control_1 = false;
                             break;
                         case 8:
-                            gui.clear();
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("+ CITY NEIGHBORHOODS                               +");
-                            System.out.println("+--------------------------------------------------+");
-                            System.out.println("[!] CURRENT NEIGHBORHOODS: ");
+                            gui.header("city neighborhoods", gui.formattedInformation("current neighborhoods: "));
                             List<Neighborhood> neighborhoods = c.getNeighborhoods();
                             for(Neighborhood n : neighborhoods) {
                                 System.out.println(n.toString());
                             }
-                            System.out.print("[#] DO YOU WANT TO REMOVE ANY NEIGHBORHOOD? [Y/n]: ");
+                            System.out.println(gui.divider());
+                            System.out.print(gui.formattedAsk("[#] DO YOU WANT TO REMOVE ANY NEIGHBORHOOD? [Y/n]: "));
                             System.out.println("WILL BE DEVELOPED!");
                             gui.pressToContinue();
                             control_1 = false;

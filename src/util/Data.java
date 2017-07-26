@@ -53,7 +53,7 @@ public class Data implements Serializable {
      * successfully message attribute.
      */
     public Data() {
-        successfullyMessage = "[!] SUCCESSFULLY OPERATION!";
+        successfullyMessage = Gui.getGreen()+"[!] SUCCESSFULLY OPERATION!"+Gui.getReset();
     }
 
     /**
