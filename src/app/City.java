@@ -131,7 +131,7 @@ public class City extends Record {
     /**
      * Neighborhoods list attribute accessor method.
      * 
-     * @return List<Neighborhood> A java lista data structure with all city neighboorhods.
+     * @return List A java lista data structure with all city neighboorhods.
      */
     public List<Neighborhood> getNeighborhoods() {
         if(neighborhoodSet.size() == 0) {

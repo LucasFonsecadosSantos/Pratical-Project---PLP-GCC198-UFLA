@@ -37,6 +37,10 @@ import gui.Gui;
  * The serializable interface was implemented here.
  */
 public class Data implements Serializable {
+
+    /**
+     * Serial version uid serializable object constant attribute.
+     */
     private static final long serialVersionUID = -842012067799192648L;
     
     /**
@@ -162,6 +166,11 @@ public class Data implements Serializable {
         return null;
     }
 
+    /**
+     * This method removes all binary database files of the disk.
+     * It locates the database binary directory and removes all files
+     * found there.
+     */
     public void deleteAllFiles() {
         try {
             File[] files = new File("./data/cities").listFiles();

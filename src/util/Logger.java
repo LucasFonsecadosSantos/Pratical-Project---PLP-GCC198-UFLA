@@ -17,17 +17,51 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * This class describes a logger files generator.
+ * It receives and produces a lot of messages about
+ * the system operation status, defined in each of the
+ * classes.
+ */
 public class Logger {
 
+    /**
+     * Successfully message string attribute.
+     * That is returned when a operation status is successfully.
+     */
     private final String successfullyMessage;
+
+    /**
+     * Logs directory attribute.
+     */
     private File logsFolder;
+
+    /**
+     * BufferedReader java object attribute.
+     * Used to read a log files.
+     */
     private BufferedReader br;
+
+    /**
+     * BufferedWriter java object attribute.
+     * Used to write a log files.
+     */
     private BufferedWriter bw;
+
+    /**
+     * Logger object constructor.
+     * It instances a log directory with file object and directory path
+     * and the successfullymessage state attribute.
+     */
     public Logger() {
         logsFolder = new File("../logs");
         successfullyMessage = "[!] SUCCESSFULLY MESSAGE!";
     }
 
+    /**
+     * This is a main logger method. It starts the log file
+     * produces and verifys somethings.
+     */
     private void startLog() {
         SystemDate sd = new SystemDate();
         try {
@@ -56,6 +90,15 @@ public class Logger {
         }
         
     }
+
+    /**
+     * This method is responsible for generating action log messages.
+     * It is called in any class to write a log status at the 
+     * current log file.
+     * 
+     * @param action A action system status to be write into text log file.
+     * @return String Operation status.
+     */
     public String generateActionLog(String action) {
         startLog();
         SystemDate sd = new SystemDate();
@@ -73,7 +116,8 @@ public class Logger {
      * This method is responsible for generating new system logs
      * It receives a message by parameter.
      * 
-     * 
+     * @param action Colocar
+     * @return String colocar
      */
     public String generateMessageLog(String action) {
         startLog();

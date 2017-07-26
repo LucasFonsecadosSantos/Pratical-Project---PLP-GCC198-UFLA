@@ -328,7 +328,7 @@ public class Gui {
      * for a city object. It shows and captures all neighborhoods attribute
      * states.
      * 
-     * @return List<String> A java string list data structure.
+     * @return List A java string list data structure.
      */
     public List<String> addNewNeighborhoodInformations() {
         String option = "y";
@@ -354,6 +354,12 @@ public class Gui {
         return informations;
     }
 
+    /**
+     * This method is responsible for shows informatios to the user delets
+     * all database binary files. It is a simple message to confirm the action.
+     * 
+     * @return String Confirmation user response.
+     */
     public String deleteDataFilesInformations() {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -364,6 +370,12 @@ public class Gui {
         return scanner.nextLine().toLowerCase();
     }
 
+    /**
+     * This method captures the user entries to remove neighboorhod operation.
+     * It asks the user if he is shure about this.
+     * 
+     * @return List A String java list data structure with all neighborhoods name.
+     */
     public List<String> removeNeighborhoodInformations() {
         String option = "y";
         List<String> names = new ArrayList<String>();
@@ -381,6 +393,14 @@ public class Gui {
         return names;
     }
 
+    /**
+     * This method captures informations to city settings change. It prints out 
+     * all cities storage at the database system and captures the city name that user
+     * wants to be edit.
+     * 
+     * @param citiesName A city java list data strucutre with all cities loaded.
+     * @return String The city name wnats to remove.
+     */
     public String editCityInformations(List<String> citiesName) {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -396,6 +416,14 @@ public class Gui {
         return scanner.nextLine().toLowerCase();
     }
 
+    /**
+     * This is an overloaded method. It shows informations or attribute states about a
+     * city received by parameter and capture the user choosen about the city settings 
+     * operation.
+     * 
+     * @param c A city object.
+     * @return int The user choosen option.
+     */
     public int editCityInformations(City c) {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -427,6 +455,14 @@ public class Gui {
         return 0;
     }
 
+    /**
+     * This is an overloaded method. It receives a neighborhood list by parameter and 
+     * prints out all names. After this, it asks the user about the neighborhood
+     * name that him wants to be edit.
+     * 
+     * @return String A neighborhood name.
+     * @param neighborhoods A neighborhoods java list data structure with all neighborhoods loaded.
+     */
     public String editNeighborhoodInformations(List<Neighborhood> neighborhoods) {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -442,6 +478,14 @@ public class Gui {
         return scanner.nextLine().toLowerCase();
     }
 
+    /**
+     * This is an overloaded method. It receives a neighborhood by parameter
+     * and prints out all informations or object city attributes states. After this,
+     * it captures from the user, your choice.
+     * 
+     * @param n A neighborhood object.
+     * @return int A integer user choice option.
+     */
     public int editNeighborhoodInformations(Neighborhood n) {
         clear();
         System.out.println("+--------------------------------------------------+");
@@ -463,6 +507,11 @@ public class Gui {
         return 0;
     }
     
+    /**
+     * This method prints out and captures informations to city search operation.
+     * 
+     * @return String City name that user wants to be search at the binary database files system.
+     */
     public String searchCityInformations() {
         clear();
         System.out.println("+--------------------------------------------------+");
