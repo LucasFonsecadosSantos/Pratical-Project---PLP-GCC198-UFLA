@@ -138,7 +138,7 @@ public class SystemManager {
      * binary files database.
      */
     public void createNewCity() {
-        List<City> cities = gui.createCityInformations();
+        List<City> cities = gui.createCityInformations(data.loadCities());
         System.out.println(Gui.getGreen() + data.storeCityData(cities) + Gui.getReset());
         logger.generateActionLog("The new cities entered by the user has been stored.");
         int count = 0;
@@ -213,7 +213,7 @@ public class SystemManager {
      * @param c City object.
      */
     public void addNewNeighborhood(City c) {
-        List<String> informations = gui.addNewNeighborhoodInformations();
+        List<String> informations = gui.addNewNeighborhoodInformations(c.getNeighborhoods());
         List<Neighborhood> neighborhoods = new ArrayList<Neighborhood>();
         String name = "";
         int demographicRate = 0;
@@ -254,13 +254,16 @@ public class SystemManager {
     public void removeNeighborhood(City c) {
         List<String> names = gui.removeNeighborhoodInformations();
         List<Neighborhood> neighborhoods = c.getNeighborhoods();
+        int index = 0;
         for(Neighborhood n : neighborhoods) {
+            index++;
             for(String s : names) {
                 if(n.getName().equals(s)) {
-                    neighborhoods.remove(n);
+                    break;
                 }
             }
         }
+        neighborhoods.remove(index-1);
         System.out.println(data.storeCityData(c));
         logger.generateActionLog("All cities stored at binary database files.");
         gui.pressToContinue();

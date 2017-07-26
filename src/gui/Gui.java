@@ -265,14 +265,26 @@ public class Gui {
      * 
      * @return List New citys registered.
      */
-    public List<City> createCityInformations() {
+    public List<City> createCityInformations(List<City> oldCities) {
         List<City> newCities = new ArrayList<City>();
         String option = "y";
         String[] informations = new String[4];
+        boolean control = true;
         do {
             header("registered a new city", formattedInformation("[!] the neighborhoods will be add after this process;"));
-            System.out.print(formattedAsk("[#] CITY NAME: "));
-            informations[0] = scanner.nextLine();
+            do {
+                control = true;
+                System.out.print(formattedAsk("[#] CITY NAME: "));
+                informations[0] = scanner.nextLine();
+                if(oldCities != null) {
+                    for(City c : oldCities) {
+                        if(c.getName().equals(informations[0])) {
+                            control = false;
+                            System.out.print(getRed() + "[X] SORRY, THIS NAME EXISTS! CHOSE OTHER!\n" + getReset());
+                        }
+                    }
+                }
+            }while(!control);
             System.out.print(formattedAsk("[#] STATE/PROVINCE/DISTRICT: "));
             informations[1] = scanner.nextLine();
             System.out.print(formattedAsk("[#] COUNTRY: "));
@@ -366,13 +378,26 @@ public class Gui {
      * 
      * @return List A java string list data structure.
      */
-    public List<String> addNewNeighborhoodInformations() {
+    public List<String> addNewNeighborhoodInformations(List<Neighborhood> neighborhoods) {
         String option = "y";
+        boolean control = true;
+        String auxStr = "";
         List<String> informations = new ArrayList<String>();
         do {
             header("register a new neighborhood", formattedInformation("[!] After that, the statistcs rates will be updated;"));
-            System.out.print(formattedAsk("[#] NEIGHBORHOOD NAME: "));
-            informations.add(scanner.nextLine().toLowerCase());
+            do {
+                control = true;
+                System.out.print(formattedAsk("[#] NEIGHBORHOOD NAME: "));
+                informations.add(auxStr = scanner.nextLine().toLowerCase());
+                if(neighborhoods != null) {
+                    for(Neighborhood n : neighborhoods) {
+                        if(auxStr.equals(n.getName())) {
+                            control = false;
+                            System.out.print(getRed() + "[X] SORRY, THIS NAME EXISTS! CHOSE OTHER!\n" + getReset());
+                        }
+                    }
+                }
+            }while(!control);
             System.out.print(formattedAsk("[#] DEMOGRAPHIC RATE: "));
             informations.add(scanner.nextLine().toLowerCase());
             System.out.print(formattedAsk("PER CAPTA INCOME RATE: "));
