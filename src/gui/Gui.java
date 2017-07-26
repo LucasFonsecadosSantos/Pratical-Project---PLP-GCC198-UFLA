@@ -170,7 +170,7 @@ public class Gui {
         System.out.println("+ [-99] EXIT                                       +");
         System.out.println("+                                                  +");
         System.out.println("+==================================================+");
-        System.out.print("[#] ENTER YOUR OPTION: ");
+        System.out.print(formattedAsk("[#] ENTER YOUR OPTION: "));
         try {
             return scanner.nextLine();
         }catch (NumberFormatException nfe) {
@@ -192,7 +192,7 @@ public class Gui {
     public String callCityManager(City city) {
         clear();
         System.out.println("+--------------------------------------------------+");
-        System.out.println(city.getName());
+        System.out.println(city.getName().toUpperCase());
         System.out.println("+--------------------------------------------------+");
         System.out.println("+                                                  +");
         System.out.println("+ What do you want with this city?                 +");
@@ -205,7 +205,7 @@ public class Gui {
         System.out.println("+ [-99] Back to main menu                          +");
         System.out.println("+                                                  +");
         System.out.println("+--------------------------------------------------+");
-        System.out.print("[#] ENTER YOUR OPTION: ");
+        System.out.print(formattedAsk("[#] ENTER YOUR OPTION: "));
         try {
             return scanner.nextLine();
         }catch (NumberFormatException nfe) {
@@ -230,21 +230,18 @@ public class Gui {
         String option = "y";
         String[] informations = new String[4];
         do {
-            clear();
-            System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
-            System.out.println(ANSI_GREEN+"+ REGISTER A NEW CITY                              +"+ANSI_RESET);
-            System.out.println(ANSI_GREEN+"+--------------------------------------------------+"+ANSI_RESET);
-            System.out.println(ANSI_YELLOW+"[!] The neighborhoods will be add after this process;"+ANSI_RESET);
-            System.out.print(ANSI_WHITE+"[#] CITY NAME: "+ANSI_RESET);
+            header("registered a new city", formattedInformation("[!] the neighborhoods will be add after this process;"));
+            System.out.print(formattedAsk("[#] CITY NAME: "));
             informations[0] = scanner.nextLine();
-            System.out.print(ANSI_WHITE+"[#] STATE/PROVINCE/DISTRICT: "+ANSI_RESET);
+            System.out.print(formattedAsk("[#] STATE/PROVINCE/DISTRICT: "));
             informations[1] = scanner.nextLine();
-            System.out.print(ANSI_WHITE+"[#] COUNTRY: "+ANSI_RESET);
+            System.out.print(formattedAsk("[#] COUNTRY: "));
             informations[2] = scanner.nextLine();
-            System.out.print(ANSI_WHITE+"[#] CURRENT MAYOR: "+ANSI_RESET);
+            System.out.print(formattedAsk("[#] CURRENT MAYOR: "));
             informations[3] = scanner.nextLine();
             newCities.add(new City(informations[0], informations[1], informations[2], informations[3]));
-            System.out.print(ANSI_WHITE+"[#] DO YOU WANT TO REGISTER A NEW CITY? [Y/n]?"+ANSI_RESET);
+            System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+            System.out.print(formattedAsk("[#] DO YOU WANT TO REGISTER A NEW CITY? [Y/n]? "));
             option = scanner.nextLine().toLowerCase();
         }while(option.equals("y"));
         pressToContinue();
@@ -259,11 +256,8 @@ public class Gui {
      * @param cities A java city data strucuture list object.
      */
     public void showCitiesData(List<City> cities) {
-        clear();
         List<Neighborhood> neighborhoodList;
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ REGISTERED CITIES INFORMATIONS                   +");
-        System.out.println("+--------------------------------------------------+");
+        header("registered cities informations", null);
         for(City c : cities) {
             System.out.println("\n+ CITY NAME: " +c.getName());
             System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
@@ -276,6 +270,7 @@ public class Gui {
                     System.out.println(n.toString());
                 }
             }
+            System.out.println();
         }
         pressToContinue();
     }
@@ -287,10 +282,7 @@ public class Gui {
      * @param c A city object.
      */
     public void showCitiesData(City c) {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ REGISTERED CITY INFORMATIONS                     +");
-        System.out.println("+--------------------------------------------------+");
+        header("registered city informations", null);
         System.out.println("\n+ CITY NAME: " +c.getName());
         System.out.println("+ STATE/DISTRICT: " +c.getDistrict());
         System.out.println("+ COUNTRY: " +c.getCountry());
@@ -305,6 +297,7 @@ public class Gui {
                 System.out.println(n.toString());
             }
         }
+        System.out.println(ANSI_WHITE+"\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n"+ANSI_RESET);
         pressToContinue();
     }
 
@@ -315,11 +308,7 @@ public class Gui {
      * @return String A string data city name.
      */
     public String captureCity() {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ WELCOME TO THE CITY MANAGER!                     +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.print("[#] WHAT IS THE CITY NAME: ");
+        header("welcome to the city manager", formattedAsk("[#] what is the city name: "));
         return scanner.nextLine();
     }
 
@@ -334,20 +323,17 @@ public class Gui {
         String option = "y";
         List<String> informations = new ArrayList<String>();
         do {
-            clear();
-            System.out.println("+--------------------------------------------------+");
-            System.out.println("+ REGISTER A NEW NEIGHBORHOOD                      +");
-            System.out.println("+--------------------------------------------------+");
-            System.out.println(ANSI_YELLOW+"[!] After that, the statistcs rates will be updated;"+ANSI_RESET);
-            System.out.print("[#] NEIGHBORHOOD NAME: ");
+            header("register a new neighborhood", formattedInformation("[!] After that, the statistcs rates will be updated;"));
+            System.out.print(formattedAsk("[#] NEIGHBORHOOD NAME: "));
             informations.add(scanner.nextLine().toLowerCase());
-            System.out.print("[#] DEMOGRAPHIC RATE: ");
+            System.out.print(formattedAsk("[#] DEMOGRAPHIC RATE: "));
             informations.add(scanner.nextLine().toLowerCase());
-            System.out.print("[#] PER CAPTA INCOME RATE: ");
+            System.out.print(formattedAsk("PER CAPTA INCOME RATE: "));
             informations.add(scanner.nextLine().toLowerCase());
-            System.out.print("[#] CRIME RATE: ");
+            System.out.print(formattedAsk("[#] CRIME RATE: "));
             informations.add(scanner.nextLine().toLowerCase());
-            System.out.print(ANSI_WHITE+"[#] DO YOU WANT TO REGISTER A NEW NEIGHBORHOOD? [Y/n]?"+ANSI_RESET);
+            System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+            System.out.print(formattedAsk("DO YOU WANT TO REGISTER A NEW NEIGHBORHOOD? [Y/n]?"));
             option = scanner.nextLine().toLowerCase();
         } while(option.equals("y"));
         pressToContinue();
@@ -361,12 +347,7 @@ public class Gui {
      * @return String Confirmation user response.
      */
     public String deleteDataFilesInformations() {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ DELETE ALL RECORDS                               +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.println(ANSI_YELLOW+"[!] All your saved data in the system will be erased;"+ANSI_RESET);
-        System.out.print("[#] DO YOU WANT TO CONTINUE [Y/n]: ");
+        header("delete all records", formattedInformation("[!] All your saved data in the system will be erased;")+formattedAsk("[#] do you want to continue [Y/n]: "));
         return scanner.nextLine().toLowerCase();
     }
 
@@ -380,14 +361,10 @@ public class Gui {
         String option = "y";
         List<String> names = new ArrayList<String>();
         do {
-            clear();
-            System.out.println("+--------------------------------------------------+");
-            System.out.println("+ REMOVE A NEIGHBORHOODS                           +");
-            System.out.println("+--------------------------------------------------+");
-            System.out.println(ANSI_YELLOW+"[!] Your saved data in the system will be erased;"+ANSI_RESET);
-            System.out.print("[#] WHICH NEIGHBORHOOD DO YOU WANT TO REMOVE? TYPE THE  NEIGHBORHOOD NAME: ");
+            header("remove a neighborhoods", formattedInformation("Your saved data in the system will be erased;")+formattedAsk("[#] WHICH NEIGHBORHOOD DO YOU WANT TO REMOVE? TYPE THE  NEIGHBORHOOD NAME: "));
             names.add(scanner.nextLine());
-            System.out.println("[#] DO YOU WANT TO REMOVE MORE NEIGHBORHOODS? [Y/n]: ");
+            System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+            System.out.println(formattedAsk("[#] DO YOU WANT TO REMOVE MORE NEIGHBORHOODS? [Y/n]: "));
             option = scanner.nextLine().toLowerCase();
         }while (option.equals("y"));
         return names;
@@ -402,17 +379,14 @@ public class Gui {
      * @return String The city name wnats to remove.
      */
     public String editCityInformations(List<String> citiesName) {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ EDIT A CITY RECORD                               +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("[!] DISPONIBLE CITIES TO EDIT: ");
+        header("edit a city record", formattedInformation("[!] disponible cities to edit:"));
         int count = 0;
         for(String c : citiesName) {
             count++;
             System.out.println("["+count+"]: "+c.replace(".bin", "").toUpperCase()+ ";");
         }
-        System.out.print("[#] WHICH CITY DO YOU WANT TO EDIT? [Type city name]: ");
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+        System.out.print(formattedAsk("WHICH CITY DO YOU WANT TO EDIT? [Type city name]: "));
         return scanner.nextLine().toLowerCase();
     }
 
@@ -425,11 +399,7 @@ public class Gui {
      * @return int The user choosen option.
      */
     public int editCityInformations(City c) {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ EDIT A CITY RECORD                               +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ [!] INFORMATIONS ABOUT THE CITY:                 +");
+        header("edit a city record", formattedInformation("informations about the city:"));
         System.out.println("\n[1] CITY NAME: " +c.getName());
         System.out.println("[2] STATE/DISTRICT: " +c.getDistrict());
         System.out.println("[3] COUNTRY: " +c.getCountry());
@@ -444,7 +414,8 @@ public class Gui {
                 System.out.println(n.toString());
             }
         }
-        System.out.println("[#] WHICH INFORMATION ABOUT THE "+c.getName()+" CITY?");
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+        System.out.println(formattedAsk("WHICH INFORMATION ABOUT THE "+c.getName()+" CITY?"));
         try {
             return Integer.parseInt(scanner.nextLine());
         }catch (NumberFormatException nfe) {
@@ -464,17 +435,13 @@ public class Gui {
      * @param neighborhoods A neighborhoods java list data structure with all neighborhoods loaded.
      */
     public String editNeighborhoodInformations(List<Neighborhood> neighborhoods) {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ EDIT A NEIGHBORHOOD                              +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("[!] DISPONIBLE NEIGHBORHOODS TO EDIT: ");
+        header("edit a neighborhood", formattedInformation("[!] disponible neighborhoods to edit:"));
         int count = 0;
         for(Neighborhood n : neighborhoods) {
             count++;
             System.out.println("["+count+"]: "+n.getName().toUpperCase()+ ";");
         }
-        System.out.print("[#] WHICH NEIGHBORHOOD DO YOU WANT TO EDIT? [Type neighborhood name]: ");
+        System.out.print(formattedAsk("WHICH NEIGHBORHOOD DO YOU WANT TO EDIT? [Type neighborhood name]: "));
         return scanner.nextLine().toLowerCase();
     }
 
@@ -487,16 +454,12 @@ public class Gui {
      * @return int A integer user choice option.
      */
     public int editNeighborhoodInformations(Neighborhood n) {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ EDIT A CITY NEIGHBORHOOD                         +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ [!] INFORMATIONS ABOUT THE NEIGHBORHOOD:         +");
+        header("edit a city neighborhood", formattedInformation("[!] informations about the neighborhood"));
         System.out.println("[1] NEIGHBORHOOD NAME: "+n.getName());
         System.out.println("[3] DEMOGRAPHIC RATE: "+n.getDemographicRate());
         System.out.println("[4] PER CAPTA INCOME RATE: "+n.getPerCaptaIncome());
         System.out.println("[5] CRIME RATE: "+n.getCrimeRate());
-        System.out.println("[#] WHICH INFORMATION ABOUT THE "+n.getName()+" CITY?");
+        System.out.println(formattedAsk("WHICH INFORMATION ABOUT THE "+n.getName()+" CITY?"));
         try {
             return Integer.parseInt(scanner.nextLine());
         }catch (NumberFormatException nfe) {
@@ -513,11 +476,7 @@ public class Gui {
      * @return String City name that user wants to be search at the binary database files system.
      */
     public String searchCityInformations() {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ SEARCH A CITY ON DATABASE                        +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.print("[#] WHICH IS THE CITY NAME: ");
+        header("search a city at database", formattedAsk("which is the city name: "));
         try {
             return scanner.nextLine().toLowerCase().trim();
         }catch(NumberFormatException fe) {
@@ -525,7 +484,7 @@ public class Gui {
         }catch(Exception e) {
             e.printStackTrace();
         }
-        return "[!] CITY NOT FOUND!";
+        return ANSI_RED + "[!] CITY NOT FOUND!" + ANSI_RESET;
     }
 
     /**
@@ -535,11 +494,7 @@ public class Gui {
      * @return String A string neighborhood name.
      */
     public String searchNeighborhoodInformations() {
-        clear();
-        System.out.println("+--------------------------------------------------+");
-        System.out.println("+ SEARCH A NEIGHBORHOOD                            +");
-        System.out.println("+--------------------------------------------------+");
-        System.out.print("[#] WHICH NEIGHBORHOOD DO YOU WANT TO SEARCH? [Type neighborhood name]: ");
+        header("search a neighborhood", formattedAsk("WHICH NEIGHBORHOOD DO YOU WANT TO SEARCH? [Type neighborhood name]: "));
         try {
             return scanner.nextLine().toLowerCase();
         }catch (NumberFormatException nfe) {
@@ -547,6 +502,36 @@ public class Gui {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return "[!] NEIGHBORHOOD NOT FOUND!";
+        return ANSI_RED + "[!] NEIGHBORHOOD NOT FOUND!" + ANSI_RESET;
+    }
+
+    public void header(String headerMsg, String subHeaderMsg) {
+        clear();
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+        System.out.println(" "+ANSI_GREEN+headerMsg.toUpperCase()+ANSI_RESET);
+        System.out.println(ANSI_WHITE+"+--------------------------------------------------+"+ANSI_RESET);
+        if(subHeaderMsg != null) {
+            System.out.print(subHeaderMsg.toUpperCase());
+        }else {
+            System.out.println("");
+        }
+    }
+
+    private String formattedAsk(String message) {
+        if(message.contains("[#]") || message.contains("[!]")) {
+            message = message.replace("[#]", "");
+            message = message.replace("[!]", "");
+            message = message.replace("\n", "");
+        }
+        return ANSI_YELLOW + "[#] "+message.toUpperCase() + ANSI_RESET;
+    }
+
+    private String formattedInformation(String message) {
+        if(message.contains("[#]") || message.contains("[!]")) {
+            message = message.replace("[#]", "");
+            message = message.replace("[!]", "");
+            message = message.replace("\n", "");
+        }
+        return ANSI_BLUE + "[!] "+message.toUpperCase()+"\n" + ANSI_RESET;
     }
 }

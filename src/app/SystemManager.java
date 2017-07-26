@@ -109,12 +109,6 @@ public class SystemManager {
      */
     public void createNewCity() {
         List<City> cities = gui.createCityInformations();
-        String name = "";
-        String district = "";
-        String country = "";
-        String currentMayor = "";
-        System.out.println(cities);
-        gui.pressToContinue();
         System.out.println(data.storeCityData(cities));
         logger.generateActionLog("The new cities entered by the user has been stored.");
         int count = 0;
@@ -132,7 +126,6 @@ public class SystemManager {
     public void loadAllCities() {
         List<City> cities = data.loadCities();
         logger.generateActionLog("All cities loaded of binary database files.");
-        System.out.println(cities);
         gui.showCitiesData(cities);
     }
 

@@ -86,8 +86,6 @@ public class Data implements Serializable {
      * @return String Successfully message about the operation.
      */
     public String storeCityData(List<City> citiesList) {
-        System.out.println(citiesList);
-        Gui.pressToContinue();
         for(City c : citiesList) {
             try {
                 // File file = new File("./data/cities/"+c.getName()+".bin");
@@ -98,9 +96,7 @@ public class Data implements Serializable {
                     //ile.createNewFile();
                 //}   
                 ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + c.getName() + ".bin"));
-                System.out.println(c + " object");
                 object.writeObject(c);
-                System.out.println(c + " object");
                 object.close();
             }catch(Exception e) {
                 e.printStackTrace();
@@ -127,7 +123,6 @@ public class Data implements Serializable {
 
             }
             ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("./data/cities/" + city.getName() + ".bin"));
-            System.out.println(city + " pressssss");
             object.writeObject(city);
             object.close();
         }catch(Exception e) {
