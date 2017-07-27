@@ -175,9 +175,9 @@ public class City extends Record {
             perCapta += n.getPerCaptaIncome();
             crime += n.getCrimeRate();
         }
-        setDemographicRate(demographic / neighborhoodSet.size());
+        setDemographicRate(demographic);
         setPerCaptaIncome(perCapta / neighborhoodSet.size());
-        setCrimeRate(crime / neighborhoodSet.size());
+        setCrimeRate(crime);
         return operation;
     }
 

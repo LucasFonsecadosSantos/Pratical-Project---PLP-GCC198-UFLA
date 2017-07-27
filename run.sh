@@ -1,9 +1,16 @@
 #!/bin/bash          
 
 cd src/
-javac -d ../build *.java
-javac -d ../build **/*.java
-cd ../build
+javac **/*.java
+javac *.java
 java Main
+sudo rm -r *.class
+cd app/
+sudo rm -r *.class
+cd ../util
+sudo rm -r *.class
+cd ../gui
+sudo rm -r *.class
+cd ../../
 
 

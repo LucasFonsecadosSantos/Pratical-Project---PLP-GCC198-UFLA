@@ -1,0 +1,20 @@
+
++==========================================+
++           CITY MANAGER LOG FILE          +
++==========================================+
++ Developed by Lucas Fonseca dos Santos.   +
++ Version: 1.0 2017                        +
++==========================================+
+[27-07-2017]: LOG FILE CREATED! Welcome to my software!
+[27-07-2017/ACTION]: SYSTEM STARTED! ;
+[27-07-2017/ACTION]: SYSTEM STARTED! ;
+[27-07-2017/ACTION]: SYSTEM STARTED! ;
+[27-07-2017/ACTION]: SYSTEM STARTED! ;
+[27-07-2017/ACTION]: The new cities entered by the user has been stored. ;
+[RECORD > OBJECT HASH CODE]: 1. City: 931919113 ;
+[27-07-2017/ACTION]: The user chosen create a new city operation. ;
+[27-07-2017/ACTION]: All cities loaded of binary database files. ;
+[27-07-2017/ACTION]: The user chosen load all cities stored. ;
+[27-07-2017/ACTION]: SYSTEM STARTED! ;
+[27-07-2017/ACTION]: All cities loaded of binary database files. ;
+[27-07-2017/ACTION]: The user chosen load all cities stored. ;

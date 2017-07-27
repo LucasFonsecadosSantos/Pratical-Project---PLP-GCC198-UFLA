@@ -1,0 +1,20 @@
+Ola juliana, tudo bem?
+
+Para executar, tem que compilar primeiro porque removi os .class.
+Como nao usei IDE, a compilacao e recursiva de pacote.
+Entao, simplifiquei fazendo um shellzinho la, entao:
+
+PARA EXECUTAR:
+
+$ sudo su
+$ <escreve sua senha>
+$ chmod +x run.sh
+$ ./run.sh
+pronto! Ele ja inicia a execucao para voce!
+
+Obrigado Juliana!
+
+Att,
+
+Lucas Fonseca
+Leticia Ferreira.
